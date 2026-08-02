@@ -16,17 +16,20 @@
   --yellow-glow: #facc15;
   --yellow-soft-bg: rgba(234, 179, 8, 0.18);
 }
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   user-select: none;
 }
+
 html, body {
   height: 100%;
   height: 100dvh;
   overflow: hidden;
 }
+
 body {
   font-family: 'Outfit', sans-serif;
   background: var(--bg-body);
@@ -34,47 +37,53 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 15px 15px 8px 15px;
+  padding: 10px 12px 6px 12px;
 }
+
 /* Header */
 header {
   text-align: center;
-  margin-top: 2px;
-  margin-bottom: 5px;
+  margin-top: 0px;
+  margin-bottom: 2px;
   flex-shrink: 0;
 }
+
 .lock-badge-top {
-  font-size: 3.24rem;
-  margin-bottom: 2px;
+  font-size: 2.8rem;
+  margin-bottom: 0px;
   filter: drop-shadow(0 0 12px rgba(250, 204, 21, 0.45));
   display: inline-block;
 }
+
 header h1 {
   font-family: 'Orbitron', sans-serif;
-  font-size: 1.45rem;
+  font-size: 1.35rem;
   background: linear-gradient(135deg, #ffffff, var(--yellow-glow));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  line-height: 1.15;
+  line-height: 1.1;
 }
+
 header p {
   color: var(--gray-muted);
-  font-size: 0.85rem;
-  margin-top: 2px;
+  font-size: 0.8rem;
+  margin-top: 1px;
 }
+
 .target-badge {
   display: inline-block;
   background: var(--yellow-soft-bg);
   border: 1px solid var(--yellow-main);
   color: var(--yellow-glow);
-  padding: 3px 12px;
+  padding: 2px 10px;
   border-radius: 20px;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  margin-top: 6px;
+  margin-top: 4px;
 }
+
 /* Main Game Layout Container */
 .game-container {
   flex: 1;
@@ -87,57 +96,65 @@ header p {
   margin: 0 auto;
   min-height: 0;
 }
+
 /* Scoreboard */
 .scoreboard-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 15px;
+  gap: 12px;
   width: 100%;
 }
+
 .score-card {
   flex: 1;
   background: var(--bg-card);
   border: 1px solid var(--gray-border);
   backdrop-filter: blur(12px);
   border-radius: 16px;
-  padding: 12px 10px;
+  padding: 8px 8px;
   text-align: center;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
   transition: border-color 0.3s ease;
 }
+
 .score-card.player { border-color: rgba(255, 255, 255, 0.4); }
 .score-card.banca { border-color: rgba(234, 179, 8, 0.6); }
+
 .score-card .label {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 1px;
   color: var(--gray-muted);
 }
+
 .score-card .score {
   font-family: 'Orbitron', sans-serif;
-  font-size: 2.2rem;
+  font-size: 2rem;
   font-weight: 900;
   line-height: 1.1;
   margin-top: 2px;
 }
+
 .score-card.player .score {
   color: #ffffff;
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
 }
+
 .score-card.banca .score {
   color: var(--yellow-glow);
   text-shadow: 0 0 12px rgba(250, 204, 21, 0.5);
 }
+
 .vs-circle {
   font-family: 'Orbitron', sans-serif;
   font-weight: 900;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: var(--yellow-glow);
   background: var(--yellow-soft-bg);
   border: 1px solid var(--yellow-main);
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -145,68 +162,76 @@ header p {
   box-shadow: 0 0 10px rgba(234, 179, 8, 0.3);
   flex-shrink: 0;
 }
+
 /* Arena Display */
 .arena {
   width: 100%;
   background: var(--bg-card);
   border: 1px solid var(--gray-border);
   border-radius: 20px;
-  padding: 22px 15px;
+  padding: 16px 12px;
   display: flex;
   justify-content: space-around;
   align-items: center;
   position: relative;
   box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.4);
 }
+
 .choice-display {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  width: 110px;
+  gap: 4px;
+  width: 100px;
 }
+
 .choice-icon-box {
-  width: 80px;
-  height: 80px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.05);
   border: 2px dashed rgba(255, 255, 255, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
+
 .choice-icon-box.active {
   border-style: solid;
   transform: scale(1.05);
 }
+
 .choice-icon-box.player-active {
   border-color: #ffffff;
   background: rgba(255, 255, 255, 0.15);
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
 }
+
 .choice-icon-box.banca-active {
   border-color: var(--yellow-main);
   background: var(--yellow-soft-bg);
   box-shadow: 0 0 18px rgba(234, 179, 8, 0.4);
 }
+
 .choice-name {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 600;
   color: var(--gray-muted);
   text-transform: uppercase;
 }
+
 /* Status Banner */
 .status-message {
   position: absolute;
-  bottom: -13px;
+  bottom: -12px;
   background: linear-gradient(90deg, #333a48, #475163);
   border: 1px solid var(--yellow-main);
   color: var(--yellow-glow);
-  padding: 5px 16px;
+  padding: 4px 14px;
   border-radius: 20px;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 600;
   box-shadow: 0 4px 15px rgba(0,0,0,0.4);
   letter-spacing: 0.5px;
@@ -216,60 +241,70 @@ header p {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 /* Controls / Buttons */
 .controls-wrapper {
   width: 100%;
   text-align: center;
 }
+
 .controls-title {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: var(--gray-muted);
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
+
 .controls {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   width: 100%;
   justify-content: center;
 }
+
 .btn-choice {
   flex: 1;
   background: rgba(45, 50, 62, 0.95);
   border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 16px;
-  padding: 12px 8px;
+  padding: 10px 6px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   cursor: pointer;
   transition: all 0.2s ease;
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
+
 .btn-choice:hover:not(:disabled) {
   border-color: var(--yellow-main);
   box-shadow: 0 0 15px rgba(234, 179, 8, 0.4);
   background: rgba(58, 64, 78, 0.95);
 }
+
 .btn-choice .icon {
-  font-size: 2rem;
+  font-size: 1.8rem;
 }
+
 .btn-choice .btn-label {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 700;
   color: var(--gray-light);
   text-transform: uppercase;
 }
+
 .btn-choice:active:not(:disabled) {
   transform: scale(0.95);
 }
+
 .btn-choice:disabled {
   opacity: 0.35;
   cursor: not-allowed;
   filter: grayscale(0.8);
 }
+
 /* Modals */
 .modal-overlay {
   position: fixed;
@@ -286,63 +321,71 @@ header p {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.4s ease;
-  padding: 20px;
+  padding: 15px;
 }
+
 .modal-overlay.active {
   opacity: 1;
   pointer-events: all;
 }
+
 .modal-card {
   background: linear-gradient(145deg, #323745, #222632);
   border: 2px solid var(--yellow-main);
   border-radius: 20px;
   max-width: 440px;
   width: 100%;
-  padding: 25px 20px;
+  padding: 18px 15px;
   text-align: center;
   box-shadow: 0 0 35px rgba(234, 179, 8, 0.35);
   transform: scale(0.8);
   transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
+
 .modal-overlay.active .modal-card {
   transform: scale(1);
 }
+
 .modal-card .icon-header {
-  font-size: 5.4rem;
-  margin-bottom: 10px;
+  font-size: 3.8rem;
+  margin-bottom: 6px;
   display: block;
   filter: drop-shadow(0 0 12px rgba(250, 204, 21, 0.35));
 }
+
 .modal-card h2 {
   font-family: 'Orbitron', sans-serif;
   color: var(--yellow-glow);
-  font-size: 1.3rem;
-  margin-bottom: 12px;
+  font-size: 1.2rem;
+  margin-bottom: 8px;
   text-transform: uppercase;
   line-height: 1.2;
 }
+
 .modal-card p {
   color: var(--gray-light);
-  font-size: 0.95rem;
-  line-height: 1.45;
-  margin-bottom: 15px;
+  font-size: 0.88rem;
+  line-height: 1.4;
+  margin-bottom: 12px;
 }
+
 /* Input Contraseña */
 .access-input-group {
-  margin: 15px 0 5px 0;
+  margin: 12px 0 5px 0;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   align-items: center;
 }
+
 .access-input {
   width: 80%;
   background: rgba(15, 18, 25, 0.8);
   border: 2px solid var(--gray-border);
   border-radius: 12px;
-  padding: 12px;
+  padding: 10px;
   font-family: 'Orbitron', sans-serif;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: var(--yellow-glow);
   text-align: center;
   letter-spacing: 3px;
@@ -350,82 +393,94 @@ header p {
   outline: none;
   transition: border-color 0.3s ease;
 }
+
 .access-input:focus {
   border-color: var(--yellow-main);
   box-shadow: 0 0 10px rgba(234, 179, 8, 0.3);
 }
+
 .key-error-msg {
   color: #ef4444;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 600;
   min-height: 1.2em;
 }
-/* Idiomas Flag Grid */
+
+/* Idiomas Flag Grid 3x4 Matriz Ajustada */
 .language-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin-top: 15px;
+  gap: 8px;
+  margin-top: 10px;
 }
+
 .btn-lang {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-  padding: 10px 5px;
+  border-radius: 10px;
+  padding: 6px 4px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
+  gap: 2px;
   cursor: pointer;
   transition: all 0.2s ease;
 }
+
 .btn-lang:hover {
   border-color: var(--yellow-glow);
   background: rgba(234, 179, 8, 0.15);
   transform: translateY(-2px);
 }
+
 .btn-lang .flag {
-  font-size: 2.2rem;
+  font-size: 1.6rem;
+  line-height: 1;
 }
+
 .btn-lang .lang-name {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 700;
   color: var(--gray-light);
   text-transform: uppercase;
 }
+
 .key-badge {
   background: linear-gradient(90deg, #ca8a04, #eab308);
-  padding: 12px 24px;
+  padding: 10px 20px;
   border-radius: 12px;
   font-family: 'Orbitron', sans-serif;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: 900;
   letter-spacing: 4px;
   color: #000;
-  margin: 15px 0;
+  margin: 12px 0;
   box-shadow: 0 0 25px rgba(234, 179, 8, 0.5);
   display: inline-block;
   white-space: nowrap;
   max-width: 100%;
 }
+
 .btn-modal {
   background: linear-gradient(90deg, var(--yellow-main), #d97706);
   color: #000;
   border: none;
-  padding: 12px 24px;
-  font-size: 0.95rem;
+  padding: 10px 20px;
+  font-size: 0.9rem;
   font-weight: 800;
   border-radius: 12px;
   cursor: pointer;
-  margin-top: 5px;
+  margin-top: 4px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.4);
   text-transform: uppercase;
   letter-spacing: 1px;
   transition: transform 0.2s ease;
 }
+
 .btn-modal:active {
   transform: scale(0.96);
 }
+
 /* Shake animation */
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
@@ -433,6 +488,7 @@ header p {
   40%, 80% { transform: translateX(8px); }
 }
 .shake { animation: shake 0.5s ease-in-out; }
+
 /* Confetti Canvas */
 #canvas-confetti {
   position: fixed;
@@ -443,24 +499,27 @@ header p {
   pointer-events: none;
   z-index: 999;
 }
+
 /* Footer */
 footer {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 6px 4px 2px 4px;
-  font-size: 0.85rem;
+  padding: 4px 4px 1px 4px;
+  font-size: 0.8rem;
   font-weight: 600;
   border-top: 1px solid rgba(255, 255, 255, 0.12);
   flex-shrink: 0;
 }
+
 footer a {
   color: var(--gray-muted);
   text-decoration: none;
   transition: color 0.2s ease;
   text-transform: none !important;
 }
+
 footer a:hover {
   color: var(--yellow-glow);
   text-shadow: 0 0 8px rgba(234, 179, 8, 0.5);
@@ -468,21 +527,32 @@ footer a:hover {
 </style>
 </head>
 <body>
+
 <canvas id="canvas-confetti"></canvas>
 
-<!-- 1. Modal de Selección de Idioma -->
+<!-- 1. Modal de Selección de Idioma (Matriz 3x4) -->
 <div class="modal-overlay active" id="lang-modal">
   <div class="modal-card">
     <span class="icon-header">🌍</span>
     <h2>Select Language</h2>
-    <p style="font-size: 0.85rem; color: var(--gray-muted);">Choose your language to start the challenge:</p>
+    <p style="font-size: 0.8rem; color: var(--gray-muted); margin-bottom: 6px;">Choose your language to start:</p>
     <div class="language-grid">
-      <button class="btn-lang" onclick="selectLanguage('es')"><span class="flag">🇪🇸</span><span class="lang-name">Español</span></button>
+      <!-- Fila 1 -->
+      <button class="btn-lang" onclick="selectLanguage('ca')"><span class="flag">🟡🔴</span><span class="lang-name">Català</span></button>
+      <button class="btn-lang" onclick="selectLanguage('es')"><span class="flag">🇪🇸</span><span class="lang-name">Castellano</span></button>
       <button class="btn-lang" onclick="selectLanguage('en')"><span class="flag">🇬🇧</span><span class="lang-name">English</span></button>
+      <!-- Fila 2 -->
       <button class="btn-lang" onclick="selectLanguage('fr')"><span class="flag">🇫🇷</span><span class="lang-name">Français</span></button>
-      <button class="btn-lang" onclick="selectLanguage('pt')"><span class="flag">🇵🇹</span><span class="lang-name">Português</span></button>
       <button class="btn-lang" onclick="selectLanguage('de')"><span class="flag">🇩🇪</span><span class="lang-name">Deutsch</span></button>
+      <button class="btn-lang" onclick="selectLanguage('pt')"><span class="flag">🇵🇹</span><span class="lang-name">Português</span></button>
+      <!-- Fila 3 -->
+      <button class="btn-lang" onclick="selectLanguage('nl')"><span class="flag">🇳🇱</span><span class="lang-name">Nederlands</span></button>
       <button class="btn-lang" onclick="selectLanguage('it')"><span class="flag">🇮🇹</span><span class="lang-name">Italiano</span></button>
+      <button class="btn-lang" onclick="selectLanguage('sv')"><span class="flag">🇸🇪</span><span class="lang-name">Svenska</span></button>
+      <!-- Fila 4 -->
+      <button class="btn-lang" onclick="selectLanguage('pl')"><span class="flag">🇵🇱</span><span class="lang-name">Polski</span></button>
+      <button class="btn-lang" onclick="selectLanguage('cs')"><span class="flag">🇨🇿</span><span class="lang-name">Čeština</span></button>
+      <button class="btn-lang" onclick="selectLanguage('ja')"><span class="flag">🇯🇵</span><span class="lang-name">日本語</span></button>
     </div>
   </div>
 </div>
@@ -506,8 +576,8 @@ footer a:hover {
   <div class="modal-card">
     <span class="icon-header">🔒</span>
     <h2>GRAND TOUR CATALUNYA ACCESS</h2>
-    <p id="intro-single-line" style="font-size: 1.15rem; font-weight: 800; color: var(--yellow-glow); margin-bottom: 6px;"></p>
-    <p id="intro-sub-line" style="font-size: 0.95rem; font-weight: 500; color: var(--gray-light); margin-bottom: 20px; line-height: 1.3;"></p>
+    <p id="intro-single-line" style="font-size: 1.1rem; font-weight: 800; color: var(--yellow-glow); margin-bottom: 4px;"></p>
+    <p id="intro-sub-line" style="font-size: 0.9rem; font-weight: 500; color: var(--gray-light); margin-bottom: 16px; line-height: 1.3;"></p>
     <button class="btn-modal" id="btn-accept-intro" onclick="closeIntroModal()">¡Aceptar el reto!</button>
   </div>
 </div>
@@ -569,7 +639,7 @@ footer a:hover {
     <span class="icon-header">🔓</span>
     <h2 style="color: #4ade80;" id="vic-title">¡ENHORABUENA! 🎉</h2>
     <p style="color: var(--gray-muted); font-size: 0.85rem; margin-bottom: 5px;"><span id="vic-sub">Has derrotado a la banca 6 a</span> <span id="final-banca-score">0</span></p>
-    <div style="margin-top: 10px;">
+    <div style="margin-top: 8px;">
       <span style="font-size: 0.85rem; color: var(--gray-light); text-transform: uppercase; font-weight: 600;" id="vic-combo-lbl">La combinación es:</span><br>
       <div class="key-badge">2019</div>
     </div>
@@ -578,8 +648,39 @@ footer a:hover {
 </div>
 
 <script>
-// Dictionary for Internationalization
+// Diccionario completo de 12 idiomas
 const translations = {
+  ca: {
+    subtitle: "Pedra, Paper o Tisora",
+    targetBadge: "Guanya 6 partides a la banca",
+    keyTitle: "Clau d'Accés",
+    keyDesc: "Introdueix la paraula gravada al contenidor:",
+    keyBtn: "Verificar",
+    keyError: "Clau incorrecta! Revisa la placa.",
+    introLine: "Benvingut/da!!!",
+    introSubLine: "Guanya la banca jugant a <strong>Pedra, Paper o Tisora</strong>.",
+    btnAccept: "Accepta el repte!",
+    lblPlayer: "Jugador",
+    lblBanca: "Banca",
+    waiting: "Esperant...",
+    thinking: "Pensant...",
+    statusStart: "Tria el teu moviment per començar!",
+    statusThinking: "Pedra, paper o tisora...!",
+    ctrlTitle: "Selecciona la teva jugada",
+    rock: "Pedra",
+    paper: "Paper",
+    scissors: "Tisora",
+    tie: "Empat en aquesta ronda!",
+    pointPlayer: "Punt per a tu!",
+    pointBanca: "Punt per a la Banca!",
+    beats: "guanya a",
+    bankReachedTarget: "La Banca ha arribat a 6 punts! Reiniciant...",
+    restarted: "Joc reiniciat. Torna-ho a provar!",
+    vicTitle: "ENHORABONA! 🎉",
+    vicSub: "Has derrotat la banca 6 a",
+    vicComboLbl: "La combinació és:",
+    btnReplay: "Jugar de Nou"
+  },
   es: {
     subtitle: "Piedra, Papel o Tijera",
     targetBadge: "Gana 6 partidas a la banca",
@@ -673,37 +774,6 @@ const translations = {
     vicComboLbl: "La combinaison est :",
     btnReplay: "Rejouer"
   },
-  pt: {
-    subtitle: "Pedra, Papel e Tesoura",
-    targetBadge: "Vença 6 rodadas contra a banca",
-    keyTitle: "Chave de Acesso",
-    keyDesc: "Digite a palavra gravada no contêiner:",
-    keyBtn: "Verificar",
-    keyError: "Chave incorreta! Verifique a placa.",
-    introLine: "Bem-vindo(a)!!!",
-    introSubLine: "Vença a banca jogando <strong>Pedra, Papel e Tesoura</strong>.",
-    btnAccept: "Aceitar o desafio!",
-    lblPlayer: "Jogador",
-    lblBanca: "Banca",
-    waiting: "Aguardando...",
-    thinking: "Pensando...",
-    statusStart: "Escolha seu movimento para começar!",
-    statusThinking: "Pedra, papel, tesoura...!",
-    ctrlTitle: "Selecione sua jogada",
-    rock: "Pedra",
-    paper: "Papel",
-    scissors: "Tesoura",
-    tie: "Empate nesta rodada!",
-    pointPlayer: "Ponto para você!",
-    pointBanca: "Ponto para a Banca!",
-    beats: "vence",
-    bankReachedTarget: "A Banca atingiu 6 pontos! Reiniciando...",
-    restarted: "Jogo reiniciado. Tente novamente!",
-    vicTitle: "PARABÉNS! 🎉",
-    vicSub: "Você derrotou a banca 6 a",
-    vicComboLbl: "A combinação é:",
-    btnReplay: "Jogar Novamente"
-  },
   de: {
     subtitle: "Schere, Stein, Papier",
     targetBadge: "Gewinne 6 Runden gegen die Bank",
@@ -735,6 +805,68 @@ const translations = {
     vicComboLbl: "Die Kombination lautet:",
     btnReplay: "Erneut spielen"
   },
+  pt: {
+    subtitle: "Pedra, Papel e Tesoura",
+    targetBadge: "Vença 6 rodadas contra a banca",
+    keyTitle: "Chave de Acesso",
+    keyDesc: "Digite a palavra gravada no contêiner:",
+    keyBtn: "Verificar",
+    keyError: "Chave incorreta! Verifique a placa.",
+    introLine: "Bem-vindo(a)!!!",
+    introSubLine: "Vença a banca jogando <strong>Pedra, Papel e Tesoura</strong>.",
+    btnAccept: "Aceitar o desafio!",
+    lblPlayer: "Jogador",
+    lblBanca: "Banca",
+    waiting: "Aguardando...",
+    thinking: "Pensando...",
+    statusStart: "Escolha seu movimento para começar!",
+    statusThinking: "Pedra, papel, tesoura...!",
+    ctrlTitle: "Selecione sua jogada",
+    rock: "Pedra",
+    paper: "Papel",
+    scissors: "Tesoura",
+    tie: "Empate nesta rodada!",
+    pointPlayer: "Ponto para você!",
+    pointBanca: "Ponto para a Banca!",
+    beats: "vence",
+    bankReachedTarget: "A Banca atingiu 6 pontos! Reiniciando...",
+    restarted: "Jogo reiniciado. Tente novamente!",
+    vicTitle: "PARABÉNS! 🎉",
+    vicSub: "Você derrotou a banca 6 a",
+    vicComboLbl: "A combinação é:",
+    btnReplay: "Jogar Novamente"
+  },
+  nl: {
+    subtitle: "Steen, Papier, Schaar",
+    targetBadge: "Win 6 rondes van de bank",
+    keyTitle: "Toegangscode",
+    keyDesc: "Voer het woord in dat op de container gegraveerd staat:",
+    keyBtn: "Verifiëren",
+    keyError: "Onjuiste code! Controleer het plaatje.",
+    introLine: "Welkom!!!",
+    introSubLine: "Versla de bank met <strong>Steen, Papier, Schaar</strong>.",
+    btnAccept: "Accepteer uitdaging!",
+    lblPlayer: "Speler",
+    lblBanca: "Bank",
+    waiting: "Wachten...",
+    thinking: "Denkt na...",
+    statusStart: "Kies je zet om te beginnen!",
+    statusThinking: "Steen, papier, schaar...!",
+    ctrlTitle: "Selecteer je zet",
+    rock: "Steen",
+    paper: "Papier",
+    scissors: "Schaar",
+    tie: "Gelijkspel deze ronde!",
+    pointPlayer: "Punt voor jou!",
+    pointBanca: "Punt voor de Bank!",
+    beats: "verslaat",
+    bankReachedTarget: "De Bank heeft 6 punten bereikt! Resetten...",
+    restarted: "Spel gereset. Probeer het opnieuw!",
+    vicTitle: "GEFELICITEERD! 🎉",
+    vicSub: "Je hebt de bank verslagen met 6 tegen",
+    vicComboLbl: "De combinatie is:",
+    btnReplay: "Opnieuw spelen"
+  },
   it: {
     subtitle: "Sasso, Carta, Forbice",
     targetBadge: "Vinci 6 round contro la banca",
@@ -761,10 +893,134 @@ const translations = {
     beats: "batte",
     bankReachedTarget: "La Banca ha raggiunto 6 punti! Ripristino...",
     restarted: "Gioco ripristinato. Riprova!",
-    vicTitle: "CONGRATULATIONS! 🎉",
+    vicTitle: "CONGRATULAZIONI! 🎉",
     vicSub: "Hai battuto la banca 6 a",
     vicComboLbl: "La combinazione è:",
     btnReplay: "Gioca di nuovo"
+  },
+  sv: {
+    subtitle: "Sten, Sax, Påse",
+    targetBadge: "Vinn 6 rundor mot banken",
+    keyTitle: "Åtkomstkod",
+    keyDesc: "Ange ordet som är ingraverat på behållaren:",
+    keyBtn: "Verifiera",
+    keyError: "Felaktig kod! Kontrollera skylten.",
+    introLine: "Välkommen!!!",
+    introSubLine: "Slå banken i <strong>Sten, Sax, Påse</strong>.",
+    btnAccept: "Anta utmaningen!",
+    lblPlayer: "Spelare",
+    lblBanca: "Banken",
+    waiting: "Väntar...",
+    thinking: "Tänker...",
+    statusStart: "Välj ditt drag för att starta!",
+    statusThinking: "Sten, sax, påse...!",
+    ctrlTitle: "Välj ditt drag",
+    rock: "Sten",
+    paper: "Påse",
+    scissors: "Sax",
+    tie: "Oavgjort denna runda!",
+    pointPlayer: "Poäng till dig!",
+    pointBanca: "Poäng till banken!",
+    beats: "slår",
+    bankReachedTarget: "Banken nådde 6 poäng! Återställer...",
+    restarted: "Spelet återställt. Försök igen!",
+    vicTitle: "GRATTIS! 🎉",
+    vicSub: "Du besegrade banken med 6 mot",
+    vicComboLbl: "Kombinationen är:",
+    btnReplay: "Spela igen"
+  },
+  pl: {
+    subtitle: "Kamień, Papier, Nożyce",
+    targetBadge: "Wygraj 6 rund z bankiem",
+    keyTitle: "Kod dostępu",
+    keyDesc: "Wpisz słowo wygrawerowane na pojemniku:",
+    keyBtn: "Zweryfikuj",
+    keyError: "Niepoprawny kod! Sprawdź tabliczkę.",
+    introLine: "Witaj!!!",
+    introSubLine: "Pokonaj bank grając w <strong>Kamień, Papier, Nożyce</strong>.",
+    btnAccept: "Przyjmij wyzwanie!",
+    lblPlayer: "Gracz",
+    lblBanca: "Bank",
+    waiting: "Oczekiwanie...",
+    thinking: "Myśli...",
+    statusStart: "Wybierz swój ruch, aby rozpocząć!",
+    statusThinking: "Kamień, papier, nożyce...!",
+    ctrlTitle: "Wybierz swój ruch",
+    rock: "Kamień",
+    paper: "Papier",
+    scissors: "Nożyce",
+    tie: "Remis w tej rundzie!",
+    pointPlayer: "Punkt dla Ciebie!",
+    pointBanca: "Punkt dla Banku!",
+    beats: "wygrywa z",
+    bankReachedTarget: "Bank osiągnął 6 punktów! Resetowanie...",
+    restarted: "Gra zresetowana. Spróbuj ponownie!",
+    vicTitle: "GRATULACJE! 🎉",
+    vicSub: "Pokonałeś bank 6 do",
+    vicComboLbl: "Kombinacja to:",
+    btnReplay: "Zagraj ponownie"
+  },
+  cs: {
+    subtitle: "Kámen, Nůžky, Papír",
+    targetBadge: "Předhoď banku na 6 vítězných kol",
+    keyTitle: "Přístupový kód",
+    keyDesc: "Zadejte slovo vyryté na kontejneru:",
+    keyBtn: "Ověřit",
+    keyError: "Nesprávný kód! Zkontrolujte štítek.",
+    introLine: "Vítejte!!!",
+    introSubLine: "Poražte banku v hře <strong>Kámen, Nůžky, Papír</strong>.",
+    btnAccept: "Přijmout výzvu!",
+    lblPlayer: "Hráč",
+    lblBanca: "Banka",
+    waiting: "Čekání...",
+    thinking: "Přemýšlí...",
+    statusStart: "Vyberte svůj tah pro začátek!",
+    statusThinking: "Kámen, nůžky, papír...!",
+    ctrlTitle: "Vyberte svůj tah",
+    rock: "Kámen",
+    paper: "Papír",
+    scissors: "Nůžky",
+    tie: "Nerozhodně v tomto kole!",
+    pointPlayer: "Bod pro vás!",
+    pointBanca: "Bod pro Banku!",
+    beats: "poráží",
+    bankReachedTarget: "Banka dosáhla 6 bodů! Resetování...",
+    restarted: "Hra resetována. Zkuste to znovu!",
+    vicTitle: "GRATULUJEME! 🎉",
+    vicSub: "Porazil jste banku 6 ku",
+    vicComboLbl: "Kombinace je:",
+    btnReplay: "Hrát znovu"
+  },
+  ja: {
+    subtitle: "じゃんけん (Janken)",
+    targetBadge: "バンクに6回勝利する",
+    keyTitle: "アクセスコード",
+    keyDesc: "容器に刻印されている単語を入力してください:",
+    keyBtn: "確認する",
+    keyError: "コードが正しくありません！",
+    introLine: "ようこそ！！！",
+    introSubLine: "<strong>じゃんけん</strong>でバンクを倒そう。",
+    btnAccept: "挑戦を受ける！",
+    lblPlayer: "プレイヤー",
+    lblBanca: "バンク",
+    waiting: "待機中...",
+    thinking: "考え中...",
+    statusStart: "手を選んでスタート！",
+    statusThinking: "じゃん・けん・ぽん...！",
+    ctrlTitle: "出し手を選択",
+    rock: "グー (石)",
+    paper: "パー (紙)",
+    scissors: "チョキ (ハサミ)",
+    tie: "あいこで...！",
+    pointPlayer: "あなたのポイント！",
+    pointBanca: "バンクのポイント！",
+    beats: "勝ち",
+    bankReachedTarget: "バンクが6ポイントに達しました！リセット中...",
+    restarted: "ゲームがリセットされました。再挑戦！",
+    vicTitle: "おめでとうございます！ 🎉",
+    vicSub: "バンクに 6 対 で勝利しました:",
+    vicComboLbl: "解錠コードは:",
+    btnReplay: "もう一度プレイ"
   }
 };
 
@@ -775,7 +1031,7 @@ function selectLanguage(lang) {
   currentLang = lang;
   const t = translations[lang];
 
-  // Apply translations to UI
+  // Aplicar traducciones a la UI
   document.getElementById('sub-header-title').innerText = t.subtitle;
   document.getElementById('target-badge-text').innerText = t.targetBadge;
   document.getElementById('key-title').innerText = t.keyTitle;
@@ -784,6 +1040,7 @@ function selectLanguage(lang) {
   document.getElementById('intro-single-line').innerText = t.introLine;
   document.getElementById('intro-sub-line').innerHTML = t.introSubLine;
   document.getElementById('btn-accept-intro').innerText = t.btnAccept;
+  
   document.getElementById('lbl-player').innerText = t.lblPlayer;
   document.getElementById('lbl-banca').innerText = t.lblBanca;
   document.getElementById('player-choice-name').innerText = t.waiting;
@@ -851,6 +1108,7 @@ function playSound(type) {
   const gain = audioCtx.createGain();
   osc.connect(gain);
   gain.connect(audioCtx.destination);
+
   const now = audioCtx.currentTime;
 
   if (type === 'click') {
@@ -906,7 +1164,7 @@ function playSound(type) {
 // Game State
 let playerScore = 0;
 let bancaScore = 0;
-const TARGET_SCORE = 6; // REDUCIDO A 6
+const TARGET_SCORE = 6;
 let isPlaying = false;
 
 const moveData = {
@@ -923,7 +1181,6 @@ function closeIntroModal() {
 function playRound(playerChoice) {
   if (isPlaying) return;
   isPlaying = true;
-
   playSound('click');
   setButtonsDisabled(true);
 
@@ -1065,7 +1322,6 @@ function setButtonsDisabled(disabled) {
 
 // Confetti Animation
 let confettiAnimationId;
-
 function startConfetti() {
   const canvas = document.getElementById('canvas-confetti');
   const ctx = canvas.getContext('2d');
