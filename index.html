@@ -369,6 +369,43 @@
             margin-bottom: 15px;
         }
 
+        /* Estilos del Input de Contraseña */
+        .access-input-group {
+            margin: 15px 0 5px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .access-input {
+            width: 80%;
+            background: rgba(15, 18, 25, 0.8);
+            border: 2px solid var(--gray-border);
+            border-radius: 12px;
+            padding: 12px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--yellow-glow);
+            text-align: center;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .access-input:focus {
+            border-color: var(--yellow-main);
+            box-shadow: 0 0 10px rgba(234, 179, 8, 0.3);
+        }
+
+        .key-error-msg {
+            color: #ef4444;
+            font-size: 0.8rem;
+            font-weight: 600;
+            min-height: 1.2em;
+        }
+
         /* Idiomas Flag Grid */
         .language-grid {
             display: grid;
@@ -443,7 +480,7 @@
             transform: scale(0.96);
         }
 
-        /* Shake animation for defeat */
+        /* Shake animation for defeat and wrong password */
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
             20%, 60% { transform: translateX(-8px); }
@@ -529,7 +566,23 @@
         </div>
     </div>
 
-    <!-- 2. Modal de Introducción / Reglas -->
+    <!-- 2. Modal de Clave de Acceso (NUEVO) -->
+    <div class="modal-overlay" id="key-modal">
+        <div class="modal-card" id="key-modal-card">
+            <span class="icon-header">🔑</span>
+            <h2 id="key-title">Clave de Acceso</h2>
+            <p id="key-desc" style="font-size: 0.85rem; color: var(--gray-muted);">Introduce la palabra grabada en el contenedor:</p>
+            
+            <div class="access-input-group">
+                <input type="text" id="access-key-input" class="access-input" placeholder="******" autocomplete="off" spellcheck="false" maxlength="15">
+                <div class="key-error-msg" id="key-error"></div>
+            </div>
+
+            <button class="btn-modal" id="btn-validate-key" onclick="checkAccessKey()">Verificar</button>
+        </div>
+    </div>
+
+    <!-- 3. Modal de Introducción / Reglas -->
     <div class="modal-overlay" id="intro-modal">
         <div class="modal-card">
             <span class="icon-header">🔒</span>
@@ -627,6 +680,10 @@
             es: {
                 subtitle: "Piedra, Papel o Tijera",
                 targetBadge: "Gana 15 partidas a la banca",
+                keyTitle: "Clave de Acceso",
+                keyDesc: "Introduce la palabra grabada en el contenedor:",
+                keyBtn: "Verificar",
+                keyError: "¡Clave incorrecta! Revisa la chapa.",
                 introLine: "Bienvenid@!!!",
                 btnAccept: "¡Aceptar el reto!",
                 lblPlayer: "Jugador",
@@ -653,6 +710,10 @@
             en: {
                 subtitle: "Rock, Paper, Scissors",
                 targetBadge: "Win 15 rounds against the bank",
+                keyTitle: "Access Passcode",
+                keyDesc: "Enter the word engraved on the container:",
+                keyBtn: "Verify",
+                keyError: "Incorrect passcode! Check the plate.",
                 introLine: "Welcome!!!",
                 btnAccept: "Accept Challenge!",
                 lblPlayer: "Player",
@@ -679,6 +740,10 @@
             fr: {
                 subtitle: "Pierre, Papier, Ciseaux",
                 targetBadge: "Gagnez 15 manches contre la banque",
+                keyTitle: "Code d'accès",
+                keyDesc: "Entrez le mot gravé sur le conteneur :",
+                keyBtn: "Vérifier",
+                keyError: "Code incorrect ! Vérifiez la plaque.",
                 introLine: "Bienvenue !!!",
                 btnAccept: "Relever le défi !",
                 lblPlayer: "Joueur",
@@ -705,6 +770,10 @@
             pt: {
                 subtitle: "Pedra, Papel e Tesoura",
                 targetBadge: "Vença 15 rodadas contra a banca",
+                keyTitle: "Chave de Acesso",
+                keyDesc: "Digite a palavra gravada no contêiner:",
+                keyBtn: "Verificar",
+                keyError: "Chave incorreta! Verifique a placa.",
                 introLine: "Bem-vindo(a)!!!",
                 btnAccept: "Aceitar o desafio!",
                 lblPlayer: "Jogador",
@@ -731,6 +800,10 @@
             de: {
                 subtitle: "Schere, Stein, Papier",
                 targetBadge: "Gewinne 15 Runden gegen die Bank",
+                keyTitle: "Zugangscode",
+                keyDesc: "Gib das auf dem Behälter gravierte Wort ein:",
+                keyBtn: "Überprüfen",
+                keyError: "Falscher Code! Überprüfe die Plakette.",
                 introLine: "Willkommen!!!",
                 btnAccept: "Herausforderung annehmen!",
                 lblPlayer: "Spieler",
@@ -757,6 +830,10 @@
             it: {
                 subtitle: "Sasso, Carta, Forbice",
                 targetBadge: "Vinci 15 round contro la banca",
+                keyTitle: "Chiave di Accesso",
+                keyDesc: "Inserisci la parola incisa sul contenitore:",
+                keyBtn: "Verifica",
+                keyError: "Chiave errata! Controlla la targa.",
                 introLine: "Benvenuto/a!!!",
                 btnAccept: "Accetta la sfida!",
                 lblPlayer: "Giocatore",
@@ -783,6 +860,7 @@
         };
 
         let currentLang = 'es';
+        const ACCESS_SECRET = "ROSCAS";
 
         function selectLanguage(lang) {
             currentLang = lang;
@@ -791,6 +869,9 @@
             // Apply translations to UI
             document.getElementById('sub-header-title').innerText = t.subtitle;
             document.getElementById('target-badge-text').innerText = t.targetBadge;
+            document.getElementById('key-title').innerText = t.keyTitle;
+            document.getElementById('key-desc').innerText = t.keyDesc;
+            document.getElementById('btn-validate-key').innerText = t.keyBtn;
             document.getElementById('intro-single-line').innerText = t.introLine;
             document.getElementById('btn-accept-intro').innerText = t.btnAccept;
             document.getElementById('lbl-player').innerText = t.lblPlayer;
@@ -813,8 +894,39 @@
 
             playSound('click');
             document.getElementById('lang-modal').classList.remove('active');
-            document.getElementById('intro-modal').classList.add('active');
+            
+            // Mostrar ventana de clave
+            document.getElementById('key-modal').classList.add('active');
+            setTimeout(() => {
+                document.getElementById('access-key-input').focus();
+            }, 300);
         }
+
+        function checkAccessKey() {
+            const inputVal = document.getElementById('access-key-input').value.trim().toUpperCase();
+            const t = translations[currentLang];
+            const errorElement = document.getElementById('key-error');
+            const cardElement = document.getElementById('key-modal-card');
+
+            if (inputVal === ACCESS_SECRET) {
+                playSound('win');
+                errorElement.innerText = '';
+                document.getElementById('key-modal').classList.remove('active');
+                document.getElementById('intro-modal').classList.add('active');
+            } else {
+                playSound('lose');
+                errorElement.innerText = t.keyError;
+                cardElement.classList.add('shake');
+                setTimeout(() => cardElement.classList.remove('shake'), 500);
+            }
+        }
+
+        // Permite pulsar Enter en el input para enviar la clave
+        document.getElementById('access-key-input').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                checkAccessKey();
+            }
+        });
 
         // Audio Synthesizer
         const AudioCtx = window.AudioContext || window.webkitAudioContext;
