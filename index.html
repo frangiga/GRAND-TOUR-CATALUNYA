@@ -1,1236 +1,368 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Grand Tour Catalunya ACCESS</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-body: radial-gradient(circle at 50% 20%, #3a3f4d 0%, #1e222b 85%);
-            --bg-card: rgba(45, 50, 62, 0.92);
-            --gray-light: #f1f5f9;
-            --gray-muted: #cbd5e1;
-            --gray-border: rgba(255, 255, 255, 0.2);
-            --yellow-main: #eab308;
-            --yellow-glow: #facc15;
-            --yellow-soft-bg: rgba(234, 179, 8, 0.18);
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Geo-Game</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+    }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            user-select: none;
-        }
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0d1b2a;
+      color: #e0e1dd;
+    }
 
-        html, body {
-            height: 100%;
-            height: 100dvh;
-            overflow: hidden;
-        }
+    /* Contenedor Principal (Zero Scroll) */
+    .app-container {
+      display: flex;
+      flex-direction: column;
+      width: 100vw;
+      height: 100vh;
+      max-width: 100%;
+      max-height: 100%;
+      padding: 15px;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
 
-        body {
-            font-family: 'Outfit', sans-serif;
-            background: var(--bg-body);
-            color: var(--gray-light);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 15px 15px 8px 15px;
-        }
+    /* Pantalla de Selección de Idioma */
+    #lang-screen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #0d1b2a;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 25px;
+      padding: 20px;
+    }
 
-        /* Header */
-        header {
-            text-align: center;
-            margin-top: 2px;
-            margin-bottom: 5px;
-            flex-shrink: 0;
-        }
+    .lang-title {
+      font-size: 1.8rem;
+      color: #f77f00;
+      text-align: center;
+      font-weight: bold;
+      text-shadow: 0 0 10px rgba(247, 127, 0, 0.4);
+    }
 
-        .lock-badge-top {
-            font-size: 3.24rem;
-            margin-bottom: 2px;
-            filter: drop-shadow(0 0 12px rgba(250, 204, 21, 0.45));
-            display: inline-block;
-        }
+    .lang-buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
 
-        header h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.45rem;
-            background: linear-gradient(135deg, #ffffff, var(--yellow-glow));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            line-height: 1.15;
-        }
+    .btn-lang {
+      background: #1b263b;
+      color: #e0e1dd;
+      border: 2px solid #f77f00;
+      padding: 12px 24px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 0 8px rgba(247, 127, 0, 0.2);
+    }
 
-        header p {
-            color: var(--gray-muted);
-            font-size: 0.85rem;
-            margin-top: 2px;
-        }
+    .btn-lang:active {
+      transform: scale(0.95);
+      background-color: #f77f00;
+      color: #0d1b2a;
+      box-shadow: 0 0 15px rgba(247, 127, 0, 0.8);
+    }
 
-        .target-badge {
-            display: inline-block;
-            background: var(--yellow-soft-bg);
-            border: 1px solid var(--yellow-main);
-            color: var(--yellow-glow);
-            padding: 3px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-top: 6px;
-        }
+    /* Cabecera / Marcador */
+    header {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #1b263b;
+      padding: 10px 15px;
+      border-radius: 8px;
+      border-bottom: 2px solid #f77f00;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
 
-        /* Main Game Layout Container */
-        .game-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
-            align-items: center;
-            width: 100%;
-            max-width: 500px;
-            margin: 0 auto;
-            min-height: 0;
-        }
+    .score-board {
+      font-size: 1rem;
+      font-weight: bold;
+      color: #e0e1dd;
+    }
 
-        /* Scoreboard */
-        .scoreboard-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            width: 100%;
-        }
+    .score-value {
+      color: #f77f00;
+      font-size: 1.2rem;
+    }
 
-        .score-card {
-            flex: 1;
-            background: var(--bg-card);
-            border: 1px solid var(--gray-border);
-            backdrop-filter: blur(12px);
-            border-radius: 16px;
-            padding: 12px 10px;
-            text-align: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
-            transition: border-color 0.3s ease;
-        }
+    /* Tablero de Juego */
+    main {
+      flex: 1;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      margin: 10px 0;
+    }
 
-        .score-card.player { border-color: rgba(255, 255, 255, 0.4); }
-        .score-card.banca { border-color: rgba(234, 179, 8, 0.6); }
+    .status-text {
+      font-size: 1.2rem;
+      text-align: center;
+      min-height: 1.5em;
+      color: #7209b7;
+      text-shadow: 0 0 8px rgba(114, 9, 183, 0.6);
+      font-weight: bold;
+    }
 
-        .score-card .label {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--gray-muted);
-        }
+    /* Efecto Neón / Brillo */
+    .glow-effect {
+      box-shadow: 0 0 15px rgba(247, 127, 0, 0.5), inset 0 0 10px rgba(247, 127, 0, 0.3);
+    }
 
-        .score-card .score {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.2rem;
-            font-weight: 900;
-            line-height: 1.1;
-            margin-top: 2px;
-        }
+    .game-board {
+      width: 100%;
+      max-width: 400px;
+      aspect-ratio: 1;
+      background: #1b263b;
+      border-radius: 12px;
+      border: 2px solid #415a77;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 10px;
+      padding: 10px;
+    }
 
-        .score-card.player .score {
-            color: #ffffff;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
-        }
+    .option-btn {
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #ffffff;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      transition: transform 0.1s, filter 0.2s;
+    }
 
-        .score-card.banca .score {
-            color: var(--yellow-glow);
-            text-shadow: 0 0 12px rgba(250, 204, 21, 0.5);
-        }
+    .option-btn:active {
+      transform: scale(0.96);
+    }
 
-        .vs-circle {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 900;
-            font-size: 0.9rem;
-            color: var(--yellow-glow);
-            background: var(--yellow-soft-bg);
-            border: 1px solid var(--yellow-main);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 10px rgba(234, 179, 8, 0.3);
-            flex-shrink: 0;
-        }
+    /* Colores de botones */
+    .btn-1 { background-color: #f77f00; }
+    .btn-2 { background-color: #3a86ff; }
+    .btn-3 { background-color: #7209b7; }
+    .btn-4 { background-color: #43aa8b; }
 
-        /* Arena Display */
-        .arena {
-            width: 100%;
-            background: var(--bg-card);
-            border: 1px solid var(--gray-border);
-            border-radius: 20px;
-            padding: 22px 15px;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            position: relative;
-            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.4);
-        }
+    /* Pantalla Final */
+    #end-screen {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      text-align: center;
+      width: 100%;
+    }
 
-        .choice-display {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            width: 110px;
-        }
+    .final-msg {
+      font-size: 1.5rem;
+      color: #f77f00;
+      font-weight: bold;
+    }
 
-        .choice-icon-box {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px dashed rgba(255, 255, 255, 0.25);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
+    .code-box {
+      background: #1b263b;
+      border: 2px dashed #f77f00;
+      padding: 15px 25px;
+      border-radius: 8px;
+      font-size: 1.3rem;
+      letter-spacing: 2px;
+      color: #e0e1dd;
+      box-shadow: 0 0 12px rgba(247, 127, 0, 0.3);
+    }
 
-        .choice-icon-box.active {
-            border-style: solid;
-            transform: scale(1.05);
-        }
-
-        .choice-icon-box.player-active {
-            border-color: #ffffff;
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-        }
-
-        .choice-icon-box.banca-active {
-            border-color: var(--yellow-main);
-            background: var(--yellow-soft-bg);
-            box-shadow: 0 0 18px rgba(234, 179, 8, 0.4);
-        }
-
-        .choice-name {
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--gray-muted);
-            text-transform: uppercase;
-        }
-
-        /* Status Banner */
-        .status-message {
-            position: absolute;
-            bottom: -13px;
-            background: linear-gradient(90deg, #333a48, #475163);
-            border: 1px solid var(--yellow-main);
-            color: var(--yellow-glow);
-            padding: 5px 16px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-            letter-spacing: 0.5px;
-            text-align: center;
-            white-space: nowrap;
-            max-width: 90%;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        /* Controls / Buttons */
-        .controls-wrapper {
-            width: 100%;
-            text-align: center;
-        }
-
-        .controls-title {
-            font-size: 0.8rem;
-            color: var(--gray-muted);
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .controls {
-            display: flex;
-            gap: 12px;
-            width: 100%;
-            justify-content: center;
-        }
-
-        .btn-choice {
-            flex: 1;
-            background: rgba(45, 50, 62, 0.95);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 16px;
-            padding: 12px 8px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        }
-
-        .btn-choice:hover:not(:disabled) {
-            border-color: var(--yellow-main);
-            box-shadow: 0 0 15px rgba(234, 179, 8, 0.4);
-            background: rgba(58, 64, 78, 0.95);
-        }
-
-        .btn-choice .icon {
-            font-size: 2rem;
-        }
-
-        .btn-choice .btn-label {
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--gray-light);
-            text-transform: uppercase;
-        }
-
-        .btn-choice:active:not(:disabled) {
-            transform: scale(0.95);
-        }
-
-        .btn-choice:disabled {
-            opacity: 0.35;
-            cursor: not-allowed;
-            filter: grayscale(0.8);
-        }
-
-        /* Modals */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(20, 23, 31, 0.95);
-            backdrop-filter: blur(10px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.4s ease;
-            padding: 20px;
-        }
-
-        .modal-overlay.active {
-            opacity: 1;
-            pointer-events: all;
-        }
-
-        .modal-card {
-            background: linear-gradient(145deg, #323745, #222632);
-            border: 2px solid var(--yellow-main);
-            border-radius: 20px;
-            max-width: 440px;
-            width: 100%;
-            padding: 25px 20px;
-            text-align: center;
-            box-shadow: 0 0 35px rgba(234, 179, 8, 0.35);
-            transform: scale(0.8);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .modal-overlay.active .modal-card {
-            transform: scale(1);
-        }
-
-        .modal-card .icon-header {
-            font-size: 5.4rem;
-            margin-bottom: 10px;
-            display: block;
-            filter: drop-shadow(0 0 12px rgba(250, 204, 21, 0.35));
-        }
-
-        .modal-card h2 {
-            font-family: 'Orbitron', sans-serif;
-            color: var(--yellow-glow);
-            font-size: 1.3rem;
-            margin-bottom: 12px;
-            text-transform: uppercase;
-            line-height: 1.2;
-        }
-
-        .modal-card p {
-            color: var(--gray-light);
-            font-size: 0.95rem;
-            line-height: 1.45;
-            margin-bottom: 15px;
-        }
-
-        /* Input Contraseña */
-        .access-input-group {
-            margin: 15px 0 5px 0;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .access-input {
-            width: 80%;
-            background: rgba(15, 18, 25, 0.8);
-            border: 2px solid var(--gray-border);
-            border-radius: 12px;
-            padding: 12px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
-            color: var(--yellow-glow);
-            text-align: center;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            outline: none;
-            transition: border-color 0.3s ease;
-        }
-
-        .access-input:focus {
-            border-color: var(--yellow-main);
-            box-shadow: 0 0 10px rgba(234, 179, 8, 0.3);
-        }
-
-        .key-error-msg {
-            color: #ef4444;
-            font-size: 0.8rem;
-            font-weight: 600;
-            min-height: 1.2em;
-        }
-
-        /* Idiomas Flag Grid */
-        .language-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin-top: 15px;
-        }
-
-        .btn-lang {
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            padding: 10px 5px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 5px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .btn-lang:hover {
-            border-color: var(--yellow-glow);
-            background: rgba(234, 179, 8, 0.15);
-            transform: translateY(-2px);
-        }
-
-        .btn-lang .flag {
-            font-size: 2.2rem;
-        }
-
-        .btn-lang .lang-name {
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: var(--gray-light);
-            text-transform: uppercase;
-        }
-
-        .key-badge {
-            background: linear-gradient(90deg, #ca8a04, #eab308);
-            padding: 12px 24px;
-            border-radius: 12px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 900;
-            letter-spacing: 4px;
-            color: #000;
-            margin: 15px 0;
-            box-shadow: 0 0 25px rgba(234, 179, 8, 0.5);
-            display: inline-block;
-            white-space: nowrap;
-            max-width: 100%;
-        }
-
-        .btn-modal {
-            background: linear-gradient(90deg, var(--yellow-main), #d97706);
-            color: #000;
-            border: none;
-            padding: 12px 24px;
-            font-size: 0.95rem;
-            font-weight: 800;
-            border-radius: 12px;
-            cursor: pointer;
-            margin-top: 5px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: transform 0.2s ease;
-        }
-
-        .btn-modal:active {
-            transform: scale(0.96);
-        }
-
-        /* Shake animation */
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            20%, 60% { transform: translateX(-8px); }
-            40%, 80% { transform: translateX(8px); }
-        }
-
-        .shake { animation: shake 0.5s ease-in-out; }
-
-        /* Confetti Canvas */
-        #canvas-confetti {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            z-index: 999;
-        }
-
-        /* Footer */
-        footer {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 6px 4px 2px 4px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            border-top: 1px solid rgba(255, 255, 255, 0.12);
-            flex-shrink: 0;
-        }
-
-        footer a {
-            color: var(--gray-muted);
-            text-decoration: none;
-            transition: color 0.2s ease;
-            text-transform: none !important;
-        }
-
-        footer a:hover {
-            color: var(--yellow-glow);
-            text-shadow: 0 0 8px rgba(234, 179, 8, 0.5);
-        }
-    </style>
+    .btn-restart {
+      background: #f77f00;
+      color: #0d1b2a;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
 
-    <canvas id="canvas-confetti"></canvas>
+  <div class="app-container">
 
-    <!-- 1. Modal de Selección de Idioma -->
-    <div class="modal-overlay active" id="lang-modal">
-        <div class="modal-card">
-            <span class="icon-header">🌍</span>
-            <h2>Select Language</h2>
-            <p style="font-size: 0.85rem; color: var(--gray-muted);">Choose your language to start the challenge:</p>
-            
-            <div class="language-grid">
-                <button class="btn-lang" onclick="selectLanguage('es')">
-                    <span class="flag">🇪🇸</span>
-                    <span class="lang-name">Español</span>
-                </button>
-                <button class="btn-lang" onclick="selectLanguage('en')">
-                    <span class="flag">🇬🇧</span>
-                    <span class="lang-name">English</span>
-                </button>
-                <button class="btn-lang" onclick="selectLanguage('fr')">
-                    <span class="flag">🇫🇷</span>
-                    <span class="lang-name">Français</span>
-                </button>
-                <button class="btn-lang" onclick="selectLanguage('pt')">
-                    <span class="flag">🇵🇹</span>
-                    <span class="lang-name">Português</span>
-                </button>
-                <button class="btn-lang" onclick="selectLanguage('de')">
-                    <span class="flag">🇩🇪</span>
-                    <span class="lang-name">Deutsch</span>
-                </button>
-                <button class="btn-lang" onclick="selectLanguage('it')">
-                    <span class="flag">🇮🇹</span>
-                    <span class="lang-name">Italiano</span>
-                </button>
-            </div>
-        </div>
+    <!-- SELECTOR DE IDIOMA INICIAL -->
+    <div id="lang-screen">
+      <div class="lang-title">Elige tu idioma / Choose language</div>
+      <div class="lang-buttons">
+        <button class="btn-lang" onclick="selectLanguage('es')">Español</button>
+        <button class="btn-lang" onclick="selectLanguage('val')">Valencià</button>
+        <button class="btn-lang" onclick="selectLanguage('en')">English</button>
+      </div>
     </div>
 
-    <!-- 2. Modal de Clave de Acceso -->
-    <div class="modal-overlay" id="key-modal">
-        <div class="modal-card" id="key-modal-card">
-            <span class="icon-header">🔑</span>
-            <h2 id="key-title">Clave de Acceso</h2>
-            <p id="key-desc" style="font-size: 0.85rem; color: var(--gray-muted);">Introduce la palabra grabada en el contenedor:</p>
-            
-            <div class="access-input-group">
-                <input type="text" id="access-key-input" class="access-input" placeholder="******" autocomplete="off" spellcheck="false" maxlength="15">
-                <div class="key-error-msg" id="key-error"></div>
-            </div>
-
-            <button class="btn-modal" id="btn-validate-key" onclick="checkAccessKey()">Verificar</button>
-        </div>
-    </div>
-
-    <!-- 3. Modal de Introducción / Reglas -->
-    <div class="modal-overlay" id="intro-modal">
-        <div class="modal-card">
-            <span class="icon-header">🔒</span>
-            <h2>GRAND TOUR CATALUNYA ACCESS</h2>
-            <p id="intro-single-line" style="font-size: 1.15rem; font-weight: 800; color: var(--yellow-glow); margin-bottom: 6px;">
-                <!-- Bienvenid@ rps -->
-            </p>
-            <p id="intro-sub-line" style="font-size: 0.95rem; font-weight: 500; color: var(--gray-light); margin-bottom: 20px; line-height: 1.3;">
-                <!-- Gana a la banca jugando a Piedra, Papel o Tijera -->
-            </p>
-            <button class="btn-modal" id="btn-accept-intro" onclick="closeIntroModal()">¡Aceptar el reto!</button>
-        </div>
-    </div>
-
+    <!-- CABECERA -->
     <header>
-        <div class="lock-badge-top">🔒</div>
-        <h1>Grand Tour Catalunya</h1>
-        <p id="sub-header-title">Piedra, Papel o Tijera</p>
-        <div class="target-badge" id="target-badge-text">Gana 15 partidas a la banca</div>
+      <div class="score-board">
+        <span id="label-round">Ronda:</span> <span id="current-round" class="score-value">1</span>/<span id="total-rounds" class="score-value">7</span>
+      </div>
+      <div class="score-board">
+        <span id="label-score">Puntos:</span> <span id="current-score" class="score-value">0</span>
+      </div>
     </header>
 
-    <div class="game-container">
-        <!-- Scoreboard -->
-        <div class="scoreboard-container">
-            <div class="score-card player">
-                <div class="label" id="lbl-player">Jugador</div>
-                <div class="score" id="player-score">0</div>
-            </div>
-            <div class="vs-circle">VS</div>
-            <div class="score-card banca">
-                <div class="label" id="lbl-banca">Banca</div>
-                <div class="score" id="banca-score">0</div>
-            </div>
-        </div>
+    <!-- ÁREA DE JUEGO -->
+    <main id="game-area">
+      <div id="status-text" class="status-text">¡Sigue la secuencia!</div>
+      
+      <div class="game-board glow-effect">
+        <button class="option-btn btn-1" onclick="handleChoice(0)"></button>
+        <button class="option-btn btn-2" onclick="handleChoice(1)"></button>
+        <button class="option-btn btn-3" onclick="handleChoice(2)"></button>
+        <button class="option-btn btn-4" onclick="handleChoice(3)"></button>
+      </div>
+    </main>
 
-        <!-- Battle Arena -->
-        <div class="arena" id="arena-box">
-            <div class="choice-display">
-                <div class="choice-icon-box" id="player-box">❓</div>
-                <div class="choice-name" id="player-choice-name">Esperando...</div>
-            </div>
-
-            <div class="choice-display">
-                <div class="choice-icon-box" id="banca-box">❓</div>
-                <div class="choice-name" id="banca-choice-name">Esperando...</div>
-            </div>
-
-            <div class="status-message" id="status-msg">¡Elige tu movimiento para empezar!</div>
-        </div>
-
-        <!-- Controls -->
-        <div class="controls-wrapper">
-            <div class="controls-title" id="ctrl-title">Selecciona tu jugada</div>
-            <div class="controls">
-                <button class="btn-choice" onclick="playRound('rock')">
-                    <span class="icon">💎</span>
-                    <span class="btn-label" id="btn-rock">Piedra</span>
-                </button>
-                <button class="btn-choice" onclick="playRound('paper')">
-                    <span class="icon">📄</span>
-                    <span class="btn-label" id="btn-paper">Papel</span>
-                </button>
-                <button class="btn-choice" onclick="playRound('scissors')">
-                    <span class="icon">✂️</span>
-                    <span class="btn-label" id="btn-scissors">Tijera</span>
-                </button>
-            </div>
-        </div>
+    <!-- PANTALLA DE RESULTADO FINAL -->
+    <div id="end-screen">
+      <div class="final-msg" id="final-status">¡Enhorabuena!</div>
+      <p id="final-desc">Has completado las 7 rondas con éxito.</p>
+      <div class="code-box" id="final-code">GEO-777</div>
+      <button class="btn-restart" id="btn-restart" onclick="restartGame()">Jugar de nuevo</button>
     </div>
 
-    <!-- FIRMA PIE DE PÁGINA -->
-    <footer>
-        <a href="https://www.geocaching.com/plan/lists/BMFC2Z7" target="_blank" rel="noopener noreferrer">GeoPaterna</a>
-        <a href="https://www.geocaching.com/p/?guid=8aa34b6e-769c-42e2-ab66-4163f9a40e13&wid=9b106a24-4eef-41ab-8a06-c207d4143cb1&ds=2" target="_blank" rel="noopener noreferrer">fran_giga</a>
-    </footer>
+  </div>
 
-    <!-- Victory Modal -->
-    <div class="modal-overlay" id="victory-modal">
-        <div class="modal-card">
-            <span class="icon-header">🔓</span>
-            <h2 style="color: #4ade80;" id="vic-title">¡ENHORABUENA! 🎉</h2>
-            <p style="color: var(--gray-muted); font-size: 0.85rem; margin-bottom: 5px;">
-                <span id="vic-sub">Has derrotado a la banca 15 a</span> <span id="final-banca-score">0</span>
-            </p>
+  <script>
+    // CONFIGURACIÓN DE RONDAS (Ajustado a 7 para muggles y agilizar)
+    const TOTAL_RONDAS = 7;
 
-            <div style="margin-top: 10px;">
-                <span style="font-size: 0.85rem; color: var(--gray-light); text-transform: uppercase; font-weight: 600;" id="vic-combo-lbl">La combinación es:</span><br>
-                <div class="key-badge">2019</div>
-            </div>
+    // TEXTOS Y TRADUCCIONES
+    const i18n = {
+      es: {
+        round: "Ronda:",
+        score: "Puntos:",
+        status: "¡Tu turno!",
+        winTitle: "¡Excelente trabajo!",
+        winDesc: "Has superado las 7 rondas sin problemas.",
+        loseTitle: "¡Oh no!",
+        loseDesc: "Has fallado. Inténtalo de nuevo.",
+        restart: "Reintentar",
+        code: "GEO-FINAL-LOG"
+      },
+      val: {
+        round: "Ronda:",
+        score: "Punts:",
+        status: "El teu torn!",
+        winTitle: "Excel·lent treball!",
+        winDesc: "Has superat les 7 rondes sense problemes.",
+        loseTitle: "Oh no!",
+        loseDesc: "Has fallat. Torna-ho a intentar.",
+        restart: "Reintentar",
+        code: "GEO-FINAL-LOG"
+      },
+      en: {
+        round: "Round:",
+        score: "Score:",
+        status: "Your turn!",
+        winTitle: "Great job!",
+        winDesc: "You completed all 7 rounds successfully.",
+        loseTitle: "Oh no!",
+        loseDesc: "You missed. Try again.",
+        restart: "Try Again",
+        code: "GEO-FINAL-LOG"
+      }
+    };
 
-            <button class="btn-modal" id="btn-replay" onclick="resetGameFull()">Jugar de Nuevo</button>
-        </div>
-    </div>
+    let currentLang = 'es';
+    let currentRound = 1;
+    let score = 0;
 
-    <script>
-        // Dictionary for Internationalization
-        const translations = {
-            es: {
-                subtitle: "Piedra, Papel o Tijera",
-                targetBadge: "Gana 15 partidas a la banca",
-                keyTitle: "Clave de Acceso",
-                keyDesc: "Introduce la palabra grabada en el contenedor:",
-                keyBtn: "Verificar",
-                keyError: "¡Clave incorrecta! Revisa la chapa.",
-                introLine: "Bienvenid@!!!",
-                introSubLine: "Gana a la banca jugando a <strong>Piedra, Papel o Tijera</strong>.",
-                btnAccept: "¡Aceptar el reto!",
-                lblPlayer: "Jugador",
-                lblBanca: "Banca",
-                waiting: "Esperando...",
-                thinking: "Pensando...",
-                statusStart: "¡Elige tu movimiento para empezar!",
-                statusThinking: "¡Piedra, papel o tijera...!",
-                ctrlTitle: "Selecciona tu jugada",
-                rock: "Piedra",
-                paper: "Papel",
-                scissors: "Tijera",
-                tie: "¡Empate en esta ronda!",
-                pointPlayer: "¡Punto para ti!",
-                pointBanca: "¡Punto para la Banca!",
-                beats: "vence a",
-                bankReachedTarget: "¡La Banca ha alcanzado 15 puntos! Reiniciando...",
-                restarted: "Juego reiniciado. ¡Inténtalo de nuevo!",
-                vicTitle: "¡ENHORABUENA! 🎉",
-                vicSub: "Has derrotado a la banca 15 a",
-                vicComboLbl: "La combinación es:",
-                btnReplay: "Jugar de Nuevo"
-            },
-            en: {
-                subtitle: "Rock, Paper, Scissors",
-                targetBadge: "Win 15 rounds against the bank",
-                keyTitle: "Access Passcode",
-                keyDesc: "Enter the word engraved on the container:",
-                keyBtn: "Verify",
-                keyError: "Incorrect passcode! Check the plate.",
-                introLine: "Welcome!!!",
-                introSubLine: "Beat the bank playing <strong>Rock, Paper, Scissors</strong>.",
-                btnAccept: "Accept Challenge!",
-                lblPlayer: "Player",
-                lblBanca: "Bank",
-                waiting: "Waiting...",
-                thinking: "Thinking...",
-                statusStart: "Choose your move to start!",
-                statusThinking: "Rock, paper, scissors...!",
-                ctrlTitle: "Select your move",
-                rock: "Rock",
-                paper: "Paper",
-                scissors: "Scissors",
-                tie: "It's a tie this round!",
-                pointPlayer: "Point for you!",
-                pointBanca: "Point for the Bank!",
-                beats: "beats",
-                bankReachedTarget: "The Bank reached 15 points! Resetting...",
-                restarted: "Game reset. Try again!",
-                vicTitle: "CONGRATULATIONS! 🎉",
-                vicSub: "You beat the bank 15 to",
-                vicComboLbl: "The combination is:",
-                btnReplay: "Play Again"
-            },
-            fr: {
-                subtitle: "Pierre, Papier, Ciseaux",
-                targetBadge: "Gagnez 15 manches contre la banque",
-                keyTitle: "Code d'accès",
-                keyDesc: "Entrez le mot gravé sur le conteneur :",
-                keyBtn: "Vérifier",
-                keyError: "Code incorrect ! Vérifiez la plaque.",
-                introLine: "Bienvenue !!!",
-                introSubLine: "Battez la banque en jouant à <strong>Pierre, Papier, Ciseaux</strong>.",
-                btnAccept: "Relever le défi !",
-                lblPlayer: "Joueur",
-                lblBanca: "Banque",
-                waiting: "En attente...",
-                thinking: "Réfléchit...",
-                statusStart: "Choisissez votre coup pour commencer !",
-                statusThinking: "Pierre, papier, ciseaux...!",
-                ctrlTitle: "Sélectionnez votre coup",
-                rock: "Pierre",
-                paper: "Papier",
-                scissors: "Ciseaux",
-                tie: "Égalité pour ce tour !",
-                pointPlayer: "Point pour vous !",
-                pointBanca: "Point pour la Banque !",
-                beats: "bat",
-                bankReachedTarget: "La Banque a atteint 15 points ! Réinitialisation...",
-                restarted: "Jeu réinitialisé. Réessayez !",
-                vicTitle: "FÉLICITATIONS ! 🎉",
-                vicSub: "Vous avez battu la banque 15 à",
-                vicComboLbl: "La combinaison est :",
-                btnReplay: "Rejouer"
-            },
-            pt: {
-                subtitle: "Pedra, Papel e Tesoura",
-                targetBadge: "Vença 15 rodadas contra a banca",
-                keyTitle: "Chave de Acesso",
-                keyDesc: "Digite a palavra gravada no contêiner:",
-                keyBtn: "Verificar",
-                keyError: "Chave incorreta! Verifique a placa.",
-                introLine: "Bem-vindo(a)!!!",
-                introSubLine: "Vença a banca jogando <strong>Pedra, Papel e Tesoura</strong>.",
-                btnAccept: "Aceitar o desafio!",
-                lblPlayer: "Jogador",
-                lblBanca: "Banca",
-                waiting: "Aguardando...",
-                thinking: "Pensando...",
-                statusStart: "Escolha seu movimento para começar!",
-                statusThinking: "Pedra, papel, tesoura...!",
-                ctrlTitle: "Selecione sua jogada",
-                rock: "Pedra",
-                paper: "Papel",
-                scissors: "Tesoura",
-                tie: "Empate nesta rodada!",
-                pointPlayer: "Ponto para você!",
-                pointBanca: "Ponto para a Banca!",
-                beats: "vence",
-                bankReachedTarget: "A Banca atingiu 15 pontos! Reiniciando...",
-                restarted: "Jogo reiniciado. Tente novamente!",
-                vicTitle: "PARABÉNS! 🎉",
-                vicSub: "Você derrotou a banca 15 a",
-                vicComboLbl: "A combinação é:",
-                btnReplay: "Jogar Novamente"
-            },
-            de: {
-                subtitle: "Schere, Stein, Papier",
-                targetBadge: "Gewinne 15 Runden gegen die Bank",
-                keyTitle: "Zugangscode",
-                keyDesc: "Gib das auf dem Behälter gravierte Wort ein:",
-                keyBtn: "Überprüfen",
-                keyError: "Falscher Code! Überprüfe die Plakette.",
-                introLine: "Willkommen!!!",
-                introSubLine: "Schlage die Bank bei <strong>Schere, Stein, Papier</strong>.",
-                btnAccept: "Herausforderung annehmen!",
-                lblPlayer: "Spieler",
-                lblBanca: "Bank",
-                waiting: "Warten...",
-                thinking: "Denkt nach...",
-                statusStart: "Wähle deinen Zug, um zu starten!",
-                statusThinking: "Schere, Stein, Papier...!",
-                ctrlTitle: "Wähle deinen Zug",
-                rock: "Stein",
-                paper: "Papier",
-                scissors: "Schere",
-                tie: "Unentschieden in dieser Runde!",
-                pointPlayer: "Punkt für dich!",
-                pointBanca: "Punkt für die Bank!",
-                beats: "schlägt",
-                bankReachedTarget: "Die Bank hat 15 Punkte erreicht! Neustart...",
-                restarted: "Spiel zurückgesetzt. Versuche es nochmal!",
-                vicTitle: "HERZLICHEN GLÜCKWUNSCH! 🎉",
-                vicSub: "Du hast die Bank 15 zu",
-                vicComboLbl: "Die Kombination lautet:",
-                btnReplay: "Erneut spielen"
-            },
-            it: {
-                subtitle: "Sasso, Carta, Forbice",
-                targetBadge: "Vinci 15 round contro la banca",
-                keyTitle: "Chiave di Accesso",
-                keyDesc: "Inserisci la parola incisa sul contenitore:",
-                keyBtn: "Verifica",
-                keyError: "Chiave errata! Controlla la targa.",
-                introLine: "Benvenuto/a!!!",
-                introSubLine: "Batti la banca giocando a <strong>Sasso, Carta, Forbice</strong>.",
-                btnAccept: "Accetta la sfida!",
-                lblPlayer: "Giocatore",
-                lblBanca: "Banca",
-                waiting: "In attesa...",
-                thinking: "Sta pensando...",
-                statusStart: "Scegli la tua mossa per iniziare!",
-                statusThinking: "Sasso, carta, forbice...!",
-                ctrlTitle: "Seleziona la tua mossa",
-                rock: "Sasso",
-                paper: "Carta",
-                scissors: "Forbice",
-                tie: "Pareggio in questo round!",
-                pointPlayer: "Punto per te!",
-                pointBanca: "Punto per la Banca!",
-                beats: "batte",
-                bankReachedTarget: "La Banca ha raggiunto 15 punti! Ripristino...",
-                restarted: "Gioco ripristinato. Riprova!",
-                vicTitle: "CONGRATULATIONS! 🎉",
-                vicSub: "Hai battuto la banca 15 a",
-                vicComboLbl: "La combinazione è:",
-                btnReplay: "Gioca di nuovo"
-            }
-        };
+    function selectLanguage(lang) {
+      currentLang = lang;
+      document.getElementById('lang-screen').style.display = 'none';
+      
+      // Aplicar traducciones
+      document.getElementById('label-round').innerText = i18n[lang].round;
+      document.getElementById('label-score').innerText = i18n[lang].score;
+      document.getElementById('status-text').innerText = i18n[lang].status;
+      document.getElementById('btn-restart').innerText = i18n[lang].restart;
+      
+      initGame();
+    }
 
-        let currentLang = 'es';
-        const ACCESS_SECRET = "ROSCAS";
+    function initGame() {
+      currentRound = 1;
+      score = 0;
+      document.getElementById('total-rounds').innerText = TOTAL_RONDAS;
+      document.getElementById('current-round').innerText = currentRound;
+      document.getElementById('current-score').innerText = score;
+      document.getElementById('game-area').style.display = 'flex';
+      document.getElementById('end-screen').style.display = 'none';
+    }
 
-        function selectLanguage(lang) {
-            currentLang = lang;
-            const t = translations[lang];
+    function handleChoice(optionIndex) {
+      // Lógica de avance de ronda
+      score += 10;
+      document.getElementById('current-score').innerText = score;
 
-            // Apply translations to UI
-            document.getElementById('sub-header-title').innerText = t.subtitle;
-            document.getElementById('target-badge-text').innerText = t.targetBadge;
-            document.getElementById('key-title').innerText = t.keyTitle;
-            document.getElementById('key-desc').innerText = t.keyDesc;
-            document.getElementById('btn-validate-key').innerText = t.keyBtn;
-            document.getElementById('intro-single-line').innerText = t.introLine;
-            document.getElementById('intro-sub-line').innerHTML = t.introSubLine;
-            document.getElementById('btn-accept-intro').innerText = t.btnAccept;
-            document.getElementById('lbl-player').innerText = t.lblPlayer;
-            document.getElementById('lbl-banca').innerText = t.lblBanca;
-            document.getElementById('player-choice-name').innerText = t.waiting;
-            document.getElementById('banca-choice-name').innerText = t.waiting;
-            document.getElementById('status-msg').innerText = t.statusStart;
-            document.getElementById('ctrl-title').innerText = t.ctrlTitle;
-            document.getElementById('btn-rock').innerText = t.rock;
-            document.getElementById('btn-paper').innerText = t.paper;
-            document.getElementById('btn-scissors').innerText = t.scissors;
-            document.getElementById('vic-title').innerText = t.vicTitle;
-            document.getElementById('vic-sub').innerText = t.vicSub;
-            document.getElementById('vic-combo-lbl').innerText = t.vicComboLbl;
-            document.getElementById('btn-replay').innerText = t.btnReplay;
+      if (currentRound < TOTAL_RONDAS) {
+        currentRound++;
+        document.getElementById('current-round').innerText = currentRound;
+      } else {
+        endGame(true);
+      }
+    }
 
-            moveData.rock.name = t.rock;
-            moveData.paper.name = t.paper;
-            moveData.scissors.name = t.scissors;
+    function endGame(isWin) {
+      document.getElementById('game-area').style.display = 'none';
+      const endScreen = document.getElementById('end-screen');
+      endScreen.style.display = 'flex';
 
-            playSound('click');
-            document.getElementById('lang-modal').classList.remove('active');
-            
-            // Mostrar ventana de clave
-            document.getElementById('key-modal').classList.add('active');
-            setTimeout(() => {
-                document.getElementById('access-key-input').focus();
-            }, 300);
-        }
+      if (isWin) {
+        document.getElementById('final-status').innerText = i18n[currentLang].winTitle;
+        document.getElementById('final-desc').innerText = i18n[currentLang].winDesc;
+        document.getElementById('final-code').innerText = i18n[currentLang].code;
+        document.getElementById('final-code').style.display = 'block';
+      } else {
+        document.getElementById('final-status').innerText = i18n[currentLang].loseTitle;
+        document.getElementById('final-desc').innerText = i18n[currentLang].loseDesc;
+        document.getElementById('final-code').style.display = 'none';
+      }
+    }
 
-        function checkAccessKey() {
-            const inputVal = document.getElementById('access-key-input').value.trim().toUpperCase();
-            const t = translations[currentLang];
-            const errorElement = document.getElementById('key-error');
-            const cardElement = document.getElementById('key-modal-card');
-
-            if (inputVal === ACCESS_SECRET) {
-                playSound('win');
-                errorElement.innerText = '';
-                document.getElementById('key-modal').classList.remove('active');
-                document.getElementById('intro-modal').classList.add('active');
-            } else {
-                playSound('lose');
-                errorElement.innerText = t.keyError;
-                cardElement.classList.add('shake');
-                setTimeout(() => cardElement.classList.remove('shake'), 500);
-            }
-        }
-
-        // Permite pulsar Enter en el input para enviar la clave
-        document.getElementById('access-key-input').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                checkAccessKey();
-            }
-        });
-
-        // Audio Synthesizer
-        const AudioCtx = window.AudioContext || window.webkitAudioContext;
-        let audioCtx;
-
-        function initAudio() {
-            if (!audioCtx) audioCtx = new AudioCtx();
-        }
-
-        function playSound(type) {
-            initAudio();
-            if (!audioCtx) return;
-
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-
-            const now = audioCtx.currentTime;
-
-            if (type === 'click') {
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(400, now);
-                osc.frequency.exponentialRampToValueAtTime(800, now + 0.08);
-                gain.gain.setValueAtTime(0.15, now);
-                gain.gain.linearRampToValueAtTime(0.01, now + 0.08);
-                osc.start(now);
-                osc.stop(now + 0.08);
-            } else if (type === 'win') {
-                osc.type = 'triangle';
-                osc.frequency.setValueAtTime(523.25, now);
-                osc.frequency.setValueAtTime(659.25, now + 0.1);
-                osc.frequency.setValueAtTime(783.99, now + 0.2);
-                gain.gain.setValueAtTime(0.2, now);
-                gain.gain.linearRampToValueAtTime(0.01, now + 0.35);
-                osc.start(now);
-                osc.stop(now + 0.35);
-            } else if (type === 'lose') {
-                osc.type = 'sawtooth';
-                osc.frequency.setValueAtTime(300, now);
-                osc.frequency.linearRampToValueAtTime(150, now + 0.25);
-                gain.gain.setValueAtTime(0.2, now);
-                gain.gain.linearRampToValueAtTime(0.01, now + 0.25);
-                osc.start(now);
-                osc.stop(now + 0.25);
-            } else if (type === 'victory') {
-                const notes = [523.25, 659.25, 783.99, 1046.50];
-                notes.forEach((freq, idx) => {
-                    const o = audioCtx.createOscillator();
-                    const g = audioCtx.createGain();
-                    o.connect(g);
-                    g.connect(audioCtx.destination);
-                    o.type = 'triangle';
-                    o.frequency.setValueAtTime(freq, now + idx * 0.12);
-                    g.gain.setValueAtTime(0.25, now + idx * 0.12);
-                    g.gain.linearRampToValueAtTime(0.01, now + idx * 0.12 + 0.25);
-                    o.start(now + idx * 0.12);
-                    o.stop(now + idx * 0.12 + 0.25);
-                });
-            } else if (type === 'reset') {
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(600, now);
-                osc.frequency.linearRampToValueAtTime(200, now + 0.4);
-                gain.gain.setValueAtTime(0.2, now);
-                gain.gain.linearRampToValueAtTime(0.01, now + 0.4);
-                osc.start(now);
-                osc.stop(now + 0.4);
-            }
-        }
-
-        // Game State
-        let playerScore = 0;
-        let bancaScore = 0;
-        const TARGET_SCORE = 15;
-        let isPlaying = false;
-
-        const moveData = {
-            rock: { icon: '💎', name: 'Piedra' },
-            paper: { icon: '📄', name: 'Papel' },
-            scissors: { icon: '✂️', name: 'Tijera' }
-        };
-
-        function closeIntroModal() {
-            playSound('click');
-            document.getElementById('intro-modal').classList.remove('active');
-        }
-
-        function playRound(playerChoice) {
-            if (isPlaying) return;
-            isPlaying = true;
-
-            playSound('click');
-            setButtonsDisabled(true);
-
-            const t = translations[currentLang];
-            const playerBox = document.getElementById('player-box');
-            const bancaBox = document.getElementById('banca-box');
-            const playerChoiceName = document.getElementById('player-choice-name');
-            const bancaChoiceName = document.getElementById('banca-choice-name');
-            const statusMsg = document.getElementById('status-msg');
-
-            playerBox.className = 'choice-icon-box active player-active';
-            bancaBox.className = 'choice-icon-box active banca-active';
-
-            playerBox.innerText = '✊';
-            bancaBox.innerText = '✊';
-            playerChoiceName.innerText = t.thinking;
-            bancaChoiceName.innerText = t.thinking;
-            statusMsg.innerText = t.statusThinking;
-
-            let step = 0;
-            const interval = setInterval(() => {
-                step++;
-                playerBox.style.transform = `translateY(${step % 2 === 0 ? -6 : 0}px) scale(1.05)`;
-                bancaBox.style.transform = `translateY(${step % 2 === 0 ? -6 : 0}px) scale(1.05)`;
-                if (step >= 6) {
-                    clearInterval(interval);
-                    resolveRound(playerChoice);
-                }
-            }, 120);
-        }
-
-        function resolveRound(playerChoice) {
-            const t = translations[currentLang];
-            const choices = ['rock', 'paper', 'scissors'];
-            const bancaChoice = choices[Math.floor(Math.random() * choices.length)];
-
-            const playerBox = document.getElementById('player-box');
-            const bancaBox = document.getElementById('banca-box');
-            const playerChoiceName = document.getElementById('player-choice-name');
-            const bancaChoiceName = document.getElementById('banca-choice-name');
-            const statusMsg = document.getElementById('status-msg');
-
-            playerBox.style.transform = 'none';
-            bancaBox.style.transform = 'none';
-
-            playerBox.innerText = moveData[playerChoice].icon;
-            bancaBox.innerText = moveData[bancaChoice].icon;
-
-            playerChoiceName.innerText = moveData[playerChoice].name;
-            bancaChoiceName.innerText = moveData[bancaChoice].name;
-
-            if (playerChoice === bancaChoice) {
-                statusMsg.innerText = t.tie;
-            } else if (
-                (playerChoice === 'rock' && bancaChoice === 'scissors') ||
-                (playerChoice === 'paper' && bancaChoice === 'rock') ||
-                (playerChoice === 'scissors' && bancaChoice === 'paper')
-            ) {
-                playerScore++;
-                document.getElementById('player-score').innerText = playerScore;
-                statusMsg.innerText = `${t.pointPlayer} (${moveData[playerChoice].name} ${t.beats} ${moveData[bancaChoice].name})`;
-                playSound('win');
-            } else {
-                bancaScore++;
-                document.getElementById('banca-score').innerText = bancaScore;
-                statusMsg.innerText = `${t.pointBanca} (${moveData[bancaChoice].name} ${t.beats} ${moveData[playerChoice].name})`;
-                playSound('lose');
-            }
-
-            setTimeout(() => {
-                if (playerScore >= TARGET_SCORE) {
-                    handleVictory();
-                } else if (bancaScore >= TARGET_SCORE) {
-                    handleDefeat();
-                } else {
-                    setButtonsDisabled(false);
-                    isPlaying = false;
-                }
-            }, 600);
-        }
-
-        function handleVictory() {
-            playSound('victory');
-            startConfetti();
-            document.getElementById('final-banca-score').innerText = bancaScore;
-            document.getElementById('victory-modal').classList.add('active');
-        }
-
-        function handleDefeat() {
-            const t = translations[currentLang];
-            playSound('reset');
-            const arenaBox = document.getElementById('arena-box');
-            arenaBox.classList.add('shake');
-
-            const statusMsg = document.getElementById('status-msg');
-            statusMsg.innerText = t.bankReachedTarget;
-            statusMsg.style.background = 'linear-gradient(90deg, #7f1d1d, #b91c1c)';
-            statusMsg.style.color = '#ffffff';
-
-            setTimeout(() => {
-                arenaBox.classList.remove('shake');
-                resetGameScores();
-                statusMsg.innerText = t.restarted;
-                statusMsg.style.background = 'linear-gradient(90deg, #333a48, #475163)';
-                statusMsg.style.color = 'var(--yellow-glow)';
-                setButtonsDisabled(false);
-                isPlaying = false;
-            }, 1800);
-        }
-
-        function resetGameScores() {
-            const t = translations[currentLang];
-            playerScore = 0;
-            bancaScore = 0;
-            document.getElementById('player-score').innerText = '0';
-            document.getElementById('banca-score').innerText = '0';
-            document.getElementById('player-box').innerText = '❓';
-            document.getElementById('banca-box').innerText = '❓';
-            document.getElementById('player-choice-name').innerText = t.waiting;
-            document.getElementById('banca-choice-name').innerText = t.waiting;
-            document.getElementById('player-box').className = 'choice-icon-box';
-            document.getElementById('banca-box').className = 'choice-icon-box';
-        }
-
-        function resetGameFull() {
-            const t = translations[currentLang];
-            document.getElementById('victory-modal').classList.remove('active');
-            stopConfetti();
-            resetGameScores();
-            document.getElementById('status-msg').innerText = t.statusStart;
-            setButtonsDisabled(false);
-            isPlaying = false;
-        }
-
-        function setButtonsDisabled(disabled) {
-            const btns = document.querySelectorAll('.btn-choice');
-            btns.forEach(b => b.disabled = disabled);
-        }
-
-        // Confetti Animation
-        let confettiAnimationId;
-        function startConfetti() {
-            const canvas = document.getElementById('canvas-confetti');
-            const ctx = canvas.getContext('2d');
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-
-            const particles = [];
-            const colors = ['#eab308', '#facc15', '#ffffff', '#cbd5e1', '#ca8a04'];
-
-            for (let i = 0; i < 80; i++) {
-                particles.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height - canvas.height,
-                    size: Math.random() * 6 + 3,
-                    color: colors[Math.floor(Math.random() * colors.length)],
-                    speedY: Math.random() * 3 + 2,
-                    speedX: Math.random() * 2 - 1,
-                    angle: Math.random() * 360,
-                    spin: Math.random() * 0.2 - 0.1
-                });
-            }
-
-            function draw() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                particles.forEach(p => {
-                    p.y += p.speedY;
-                    p.x += p.speedX;
-                    p.angle += p.spin;
-
-                    if (p.y > canvas.height) {
-                        p.y = -10;
-                        p.x = Math.random() * canvas.width;
-                    }
-
-                    ctx.save();
-                    ctx.translate(p.x, p.y);
-                    ctx.rotate(p.angle);
-                    ctx.fillStyle = p.color;
-                    ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
-                    ctx.restore();
-                });
-
-                confettiAnimationId = requestAnimationFrame(draw);
-            }
-
-            draw();
-        }
-
-        function stopConfetti() {
-            if (confettiAnimationId) {
-                cancelAnimationFrame(confettiAnimationId);
-            }
-            const canvas = document.getElementById('canvas-confetti');
-            const ctx = canvas.getContext('2d');
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-        }
-
-        window.addEventListener('resize', () => {
-            const canvas = document.getElementById('canvas-confetti');
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
-    </script>
+    function restartGame() {
+      initGame();
+    }
+  </script>
 </body>
 </html>
