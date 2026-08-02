@@ -590,8 +590,8 @@
             <p id="intro-single-line" style="font-size: 1.15rem; font-weight: 800; color: var(--yellow-glow); margin-bottom: 6px;">
                 <!-- Bienvenid@ rps -->
             </p>
-            <p id="intro-sub-line" style="font-size: 0.9rem; font-weight: 500; color: var(--gray-light); margin-bottom: 20px; line-height: 1.3;">
-                <!-- Gana a la banca rps -->
+            <p id="intro-sub-line" style="font-size: 0.95rem; font-weight: 500; color: var(--gray-light); margin-bottom: 20px; line-height: 1.3;">
+                <!-- Gana a la banca jugando a Piedra, Papel o Tijera -->
             </p>
             <button class="btn-modal" id="btn-accept-intro" onclick="closeIntroModal()">¡Aceptar el reto!</button>
         </div>
@@ -688,7 +688,7 @@
                 keyBtn: "Verificar",
                 keyError: "¡Clave incorrecta! Revisa la chapa.",
                 introLine: "Bienvenid@!!!",
-                introSubLine: "Gana a la banca jugando a piedra, papel o tijera.",
+                introSubLine: "Gana a la banca jugando a <strong>Piedra, Papel o Tijera</strong>.",
                 btnAccept: "¡Aceptar el reto!",
                 lblPlayer: "Jugador",
                 lblBanca: "Banca",
@@ -719,7 +719,7 @@
                 keyBtn: "Verify",
                 keyError: "Incorrect passcode! Check the plate.",
                 introLine: "Welcome!!!",
-                introSubLine: "Beat the bank playing rock, paper, scissors.",
+                introSubLine: "Beat the bank playing <strong>Rock, Paper, Scissors</strong>.",
                 btnAccept: "Accept Challenge!",
                 lblPlayer: "Player",
                 lblBanca: "Bank",
@@ -750,7 +750,7 @@
                 keyBtn: "Vérifier",
                 keyError: "Code incorrect ! Vérifiez la plaque.",
                 introLine: "Bienvenue !!!",
-                introSubLine: "Battez la banque en jouant à pierre, papier, ciseaux.",
+                introSubLine: "Battez la banque en jouant à <strong>Pierre, Papier, Ciseaux</strong>.",
                 btnAccept: "Relever le défi !",
                 lblPlayer: "Joueur",
                 lblBanca: "Banque",
@@ -781,7 +781,7 @@
                 keyBtn: "Verificar",
                 keyError: "Chave incorreta! Verifique a placa.",
                 introLine: "Bem-vindo(a)!!!",
-                introSubLine: "Vença a banca jogando pedra, papel e tesoura.",
+                introSubLine: "Vença a banca jogando <strong>Pedra, Papel e Tesoura</strong>.",
                 btnAccept: "Aceitar o desafio!",
                 lblPlayer: "Jogador",
                 lblBanca: "Banca",
@@ -812,7 +812,7 @@
                 keyBtn: "Überprüfen",
                 keyError: "Falscher Code! Überprüfe die Plakette.",
                 introLine: "Willkommen!!!",
-                introSubLine: "Schlage die Bank bei Schere, Stein, Papier.",
+                introSubLine: "Schlage die Bank bei <strong>Schere, Stein, Papier</strong>.",
                 btnAccept: "Herausforderung annehmen!",
                 lblPlayer: "Spieler",
                 lblBanca: "Bank",
@@ -843,7 +843,7 @@
                 keyBtn: "Verifica",
                 keyError: "Chiave errata! Controlla la targa.",
                 introLine: "Benvenuto/a!!!",
-                introSubLine: "Batti la banca giocando a sasso, carta, forbice.",
+                introSubLine: "Batti la banca giocando a <strong>Sasso, Carta, Forbice</strong>.",
                 btnAccept: "Accetta la sfida!",
                 lblPlayer: "Giocatore",
                 lblBanca: "Banca",
@@ -882,7 +882,7 @@
             document.getElementById('key-desc').innerText = t.keyDesc;
             document.getElementById('btn-validate-key').innerText = t.keyBtn;
             document.getElementById('intro-single-line').innerText = t.introLine;
-            document.getElementById('intro-sub-line').innerText = t.introSubLine;
+            document.getElementById('intro-sub-line').innerHTML = t.introSubLine;
             document.getElementById('btn-accept-intro').innerText = t.btnAccept;
             document.getElementById('lbl-player').innerText = t.lblPlayer;
             document.getElementById('lbl-banca').innerText = t.lblBanca;
