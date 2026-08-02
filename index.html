@@ -422,9 +422,11 @@ header p {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
+  gap: 4px;
   cursor: pointer;
   transition: all 0.2s ease;
+  height: 52px;
+  justify-content: center;
 }
 
 .btn-lang:hover {
@@ -434,12 +436,32 @@ header p {
 }
 
 .btn-lang .flag {
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   line-height: 1;
 }
 
+/* Flag de Catalunya dibujada con CSS */
+.flag-catalunya {
+  width: 25px;
+  height: 17px;
+  background: #facc15;
+  border-radius: 2px;
+  box-shadow: 0 0 2px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 1px 0;
+  overflow: hidden;
+}
+
+.flag-catalunya .stripe {
+  height: 2px;
+  background-color: #dc2626;
+  width: 100%;
+}
+
 .btn-lang .lang-name {
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 700;
   color: var(--gray-light);
   text-transform: uppercase;
@@ -538,7 +560,15 @@ footer a:hover {
     <p style="font-size: 0.8rem; color: var(--gray-muted); margin-bottom: 6px;">Choose your language to start:</p>
     <div class="language-grid">
       <!-- Fila 1 -->
-      <button class="btn-lang" onclick="selectLanguage('ca')"><span class="flag">🟡🔴</span><span class="lang-name">Català</span></button>
+      <button class="btn-lang" onclick="selectLanguage('ca')">
+        <span class="flag-catalunya">
+          <span class="stripe"></span>
+          <span class="stripe"></span>
+          <span class="stripe"></span>
+          <span class="stripe"></span>
+        </span>
+        <span class="lang-name">Català</span>
+      </button>
       <button class="btn-lang" onclick="selectLanguage('es')"><span class="flag">🇪🇸</span><span class="lang-name">Castellano</span></button>
       <button class="btn-lang" onclick="selectLanguage('en')"><span class="flag">🇬🇧</span><span class="lang-name">English</span></button>
       <!-- Fila 2 -->
