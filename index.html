@@ -369,6 +369,22 @@ header p {
   margin-bottom: 12px;
 }
 
+/* Estilo para el subtexto de bienvenida (sin forzar mayúsculas) */
+#intro-sub-line {
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--gray-light);
+  margin-bottom: 16px;
+  line-height: 1.4;
+  text-transform: none;
+}
+
+#intro-sub-line strong {
+  font-weight: 800;
+  color: var(--yellow-glow);
+  text-transform: uppercase;
+}
+
 /* Input Contraseña */
 .access-input-group {
   margin: 12px 0 5px 0;
@@ -606,8 +622,8 @@ footer a:hover {
   <div class="modal-card">
     <span class="icon-header">🔒</span>
     <h2>GRAND TOUR CATALUNYA ACCESS</h2>
-    <p id="intro-single-line" style="font-size: 1.1rem; font-weight: 800; color: var(--yellow-glow); margin-bottom: 6px;"></p>
-    <p id="intro-sub-line" style="font-size: 0.95rem; font-weight: 600; color: var(--gray-light); margin-bottom: 16px; line-height: 1.4;"></p>
+    <p id="intro-single-line" style="font-size: 1.1rem; font-weight: 600; color: var(--yellow-glow); margin-bottom: 6px; text-transform: none;"></p>
+    <p id="intro-sub-line"></p>
     <button class="btn-modal" id="btn-accept-intro" onclick="closeIntroModal()">¡ACEPTAR EL RETO!</button>
   </div>
 </div>
@@ -687,8 +703,8 @@ const translations = {
     keyDesc: "INTRODUEIX LA PARAULA GRAVADA AL CONTENIDOR:",
     keyBtn: "VERIFICAR",
     keyError: "CLAU INCORRECTA! REVISA LA PLACA.",
-    introLine: "BENVINGUT/DA!!!",
-    introSubLine: "GUANYA LA BANCA JUGANT A<br><strong>PEDRA, PAPER O TISORA</strong>",
+    introLine: "Benvingut/da!!!",
+    introSubLine: "Guanya la banca jugant a<br><strong>PEDRA, PAPER O TISORA</strong>",
     btnAccept: "ACCEPTA EL REPTE!",
     lblPlayer: "JUGADOR",
     lblBanca: "BANCA",
@@ -718,8 +734,8 @@ const translations = {
     keyDesc: "INTRODUCE LA PALABRA GRABADA EN EL CONTENEDOR:",
     keyBtn: "VERIFICAR",
     keyError: "¡CLAVE INCORRECTA! REVISA LA CHAPA.",
-    introLine: "BIENVENID@!!!",
-    introSubLine: "GANA A LA BANCA JUGANDO A<br><strong>PIEDRA, PAPEL O TIJERA</strong>",
+    introLine: "Bienvenid@!!!",
+    introSubLine: "Gana a la banca jugando a<br><strong>PIEDRA, PAPEL O TIJERA</strong>",
     btnAccept: "¡ACEPTAR EL RETO!",
     lblPlayer: "JUGADOR",
     lblBanca: "BANCA",
@@ -749,8 +765,8 @@ const translations = {
     keyDesc: "ENTER THE WORD ENGRAVED ON THE CONTAINER:",
     keyBtn: "VERIFY",
     keyError: "INCORRECT PASSCODE! CHECK THE PLATE.",
-    introLine: "WELCOME!!!",
-    introSubLine: "BEAT THE BANK PLAYING<br><strong>ROCK, PAPER, SCISSORS</strong>",
+    introLine: "Welcome!!!",
+    introSubLine: "Beat the bank playing<br><strong>ROCK, PAPER, SCISSORS</strong>",
     btnAccept: "ACCEPT CHALLENGE!",
     lblPlayer: "PLAYER",
     lblBanca: "BANK",
@@ -780,8 +796,8 @@ const translations = {
     keyDesc: "ENTREZ LE MOT GRAVÉ SUR LE CONTENEUR :",
     keyBtn: "VÉRIFIER",
     keyError: "CODE INCORRECT ! VÉRIFIEZ LA PLAQUE.",
-    introLine: "BIENVENUE !!!",
-    introSubLine: "BATTEZ LA BANQUE EN JOUANT À<br><strong>PIERRE, PAPIER, CISEAUX</strong>",
+    introLine: "Bienvenue !!!",
+    introSubLine: "Battez la banque en jouant à<br><strong>PIERRE, PAPIER, CISEAUX</strong>",
     btnAccept: "RELEVER LE DÉFI !",
     lblPlayer: "JOUEUR",
     lblBanca: "BANQUE",
@@ -811,8 +827,8 @@ const translations = {
     keyDesc: "GIB DAS AUF DEM BEHÄLTER GRAVIERTE WORT EIN:",
     keyBtn: "ÜBERPRÜFEN",
     keyError: "FALSCHER CODE! ÜBERPRÜFE DIE PLAKETTE.",
-    introLine: "WILLKOMMEN!!!",
-    introSubLine: "SCHLAGE DIE BANK BEI<br><strong>SCHERE, STEIN, PAPIER</strong>",
+    introLine: "Willkommen!!!",
+    introSubLine: "Schlage die Bank bei<br><strong>SCHERE, STEIN, PAPIER</strong>",
     btnAccept: "HERAUSFORDERUNG ANNEHMEN!",
     lblPlayer: "SPIELER",
     lblBanca: "BANK",
@@ -842,8 +858,8 @@ const translations = {
     keyDesc: "DIGITE A PALAVRA GRAVADA NO CONTÊINER:",
     keyBtn: "VERIFICAR",
     keyError: "CHAVE INCORRETA! VERIFIQUE A PLACA.",
-    introLine: "BEM-VINDO(A)!!!",
-    introSubLine: "VENÇA A BANCA JOGANDO<br><strong>PEDRA, PAPEL E TESOURA</strong>",
+    introLine: "Bem-vindo(a)!!!",
+    introSubLine: "Vença a banca jogando<br><strong>PEDRA, PAPEL E TESOURA</strong>",
     btnAccept: "ACEITAR O DESAFIO!",
     lblPlayer: "JOGADOR",
     lblBanca: "BANCA",
@@ -873,8 +889,8 @@ const translations = {
     keyDesc: "VOER HET WOORD IN DAT OP DE CONTAINER GEGRAVEERD STAAT:",
     keyBtn: "VERIFIËREN",
     keyError: "ONJUISTE CODE! CONTROLEER HET PLAATJE.",
-    introLine: "WELKOM!!!",
-    introSubLine: "VERSLA DE BANK MET<br><strong>STEEN, PAPIER, SCHAAR</strong>",
+    introLine: "Welkom!!!",
+    introSubLine: "Versla de bank met<br><strong>STEEN, PAPIER, SCHAAR</strong>",
     btnAccept: "ACCEPTEER UITDAGING!",
     lblPlayer: "SPELER",
     lblBanca: "BANK",
@@ -904,8 +920,8 @@ const translations = {
     keyDesc: "INSERISCI LA PAROLA INCISA SUL CONTENITORE:",
     keyBtn: "VERIFICA",
     keyError: "CHIAVE ERRATA! CONTROLLA LA TARGA.",
-    introLine: "BENVENUTO/A!!!",
-    introSubLine: "BATTI LA BANCA GIOCANDO A<br><strong>SASSO, CARTA, FORBICE</strong>",
+    introLine: "Benvenuto/a!!!",
+    introSubLine: "Batti la banca giocando a<br><strong>SASSO, CARTA, FORBICE</strong>",
     btnAccept: "ACCETTA LA SFIDA!",
     lblPlayer: "GIOCATORE",
     lblBanca: "BANCA",
@@ -935,8 +951,8 @@ const translations = {
     keyDesc: "ANGE ORDET SOM ÄR INGRAVERAT PÅ BEHÅLLAREN:",
     keyBtn: "VERIFIERA",
     keyError: "FELAKTIG KOD! KONTROLLERA SKYLTEN.",
-    introLine: "VÄLKOMMEN!!!",
-    introSubLine: "SLÅ BANKEN I<br><strong>STEN, SAX, PÅSE</strong>",
+    introLine: "Välkommen!!!",
+    introSubLine: "Slå banken i<br><strong>STEN, SAX, PÅSE</strong>",
     btnAccept: "ANTA UTMANINGEN!",
     lblPlayer: "SPELARE",
     lblBanca: "BANKEN",
@@ -966,8 +982,8 @@ const translations = {
     keyDesc: "WPISZ SŁOWO WYGRAWEROWANE NA POJEMNIKU:",
     keyBtn: "ZWERYFIKUJ",
     keyError: "NIEPOPRAWNY KOD! SPRAWDŹ TABLICZKĘ.",
-    introLine: "WITAJ!!!",
-    introSubLine: "POKONAJ BANK GRAJĄC W<br><strong>KAMIEŃ, PAPIER, NOŻYCE</strong>",
+    introLine: "Witaj!!!",
+    introSubLine: "Pokonaj bank grając w<br><strong>KAMIEŃ, PAPIER, NOŻYCE</strong>",
     btnAccept: "PRZYJMIJ WYZWANIE!",
     lblPlayer: "GRACZ",
     lblBanca: "BANK",
@@ -997,8 +1013,8 @@ const translations = {
     keyDesc: "ZADEJTE SLOVO VYRYTÉ NA KONTEJNERU:",
     keyBtn: "OVĚŘIT",
     keyError: "NESPRÁVNÝ KÓD! ZKONTROLUJTE ŠTÍTEK.",
-    introLine: "VÍTEJTE!!!",
-    introSubLine: "PORAŽTE BANKU V HŘE<br><strong>KÁMEN, NŮŽKY, PAPÍR</strong>",
+    introLine: "Vítejte!!!",
+    introSubLine: "Poražte banku v hře<br><strong>KÁMEN, NŮŽKY, PAPÍR</strong>",
     btnAccept: "PŘIJMOUT VÝZVU!",
     lblPlayer: "HRÁČ",
     lblBanca: "BANKA",
