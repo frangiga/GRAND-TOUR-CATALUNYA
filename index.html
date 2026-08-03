@@ -369,7 +369,6 @@ header p {
   margin-bottom: 12px;
 }
 
-/* Estilo para el subtexto de bienvenida (sin forzar mayúsculas) */
 #intro-sub-line {
   font-size: 0.95rem;
   font-weight: 400;
@@ -456,7 +455,6 @@ header p {
   line-height: 1;
 }
 
-/* Flag de Catalunya dibujada con CSS */
 .flag-catalunya {
   width: 25px;
   height: 17px;
@@ -519,7 +517,6 @@ header p {
   transform: scale(0.96);
 }
 
-/* Shake animation */
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
   20%, 60% { transform: translateX(-8px); }
@@ -527,7 +524,6 @@ header p {
 }
 .shake { animation: shake 0.5s ease-in-out; }
 
-/* Confetti Canvas */
 #canvas-confetti {
   position: fixed;
   top: 0;
@@ -538,11 +534,11 @@ header p {
   z-index: 999;
 }
 
-/* Footer */
+/* Footer / Firma con distribución en 3 tercios */
 footer {
   width: 100%;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
   padding: 4px 4px 1px 4px;
   font-size: 0.8rem;
@@ -561,6 +557,18 @@ footer a {
 footer a:hover {
   color: var(--yellow-glow);
   text-shadow: 0 0 8px rgba(234, 179, 8, 0.5);
+}
+
+/* Primer elemento asignado al tercio izquierdo y centrado en él */
+footer a.link-paterna {
+  grid-column: 1;
+  text-align: center;
+}
+
+/* Segundo elemento asignado al tercio derecho y centrado en él */
+footer a.link-nick {
+  grid-column: 3;
+  text-align: center;
 }
 </style>
 </head>
@@ -673,10 +681,10 @@ footer a:hover {
   </div>
 </div>
 
-<!-- FIRMA PIE DE PÁGINA -->
+<!-- FIRMA PIE DE PÁGINA (Reajustada por tercios) -->
 <footer>
-  <a href="https://www.geocaching.com/plan/lists/BMFC2Z7" target="_blank" rel="noopener noreferrer">GeoPaterna</a>
-  <a href="https://www.geocaching.com/p/?guid=8aa34b6e-769c-42e2-ab66-4163f9a40e13&wid=9b106a24-4eef-41ab-8a06-c207d4143cb1&ds=2" target="_blank" rel="noopener noreferrer">fran_giga</a>
+  <a href="https://www.geocaching.com/plan/lists/BMFC2Z7" target="_blank" rel="noopener noreferrer" class="link-paterna">GeoPaterna</a>
+  <a href="https://www.geocaching.com/p/?guid=8aa34b6e-769c-42e2-ab66-4163f9a40e13&wid=9b106a24-4eef-41ab-8a06-c207d4143cb1&ds=2" target="_blank" rel="noopener noreferrer" class="link-nick">fran_giga</a>
 </footer>
 
 <!-- Victory Modal -->
@@ -1077,7 +1085,6 @@ function selectLanguage(lang) {
   currentLang = lang;
   const t = translations[lang];
 
-  // Aplicar traducciones a la UI
   document.getElementById('sub-header-title').innerText = t.subtitle;
   document.getElementById('target-badge-text').innerText = t.targetBadge;
   document.getElementById('key-title').innerText = t.keyTitle;
@@ -1138,7 +1145,6 @@ document.getElementById('access-key-input').addEventListener('keypress', functio
   }
 });
 
-// Audio Synthesizer
 const AudioCtx = window.AudioContext || window.webkitAudioContext;
 let audioCtx;
 
@@ -1207,7 +1213,6 @@ function playSound(type) {
   }
 }
 
-// Game State
 let playerScore = 0;
 let bancaScore = 0;
 const TARGET_SCORE = 6;
@@ -1366,7 +1371,6 @@ function setButtonsDisabled(disabled) {
   btns.forEach(b => b.disabled = disabled);
 }
 
-// Confetti Animation
 let confettiAnimationId;
 function startConfetti() {
   const canvas = document.getElementById('canvas-confetti');
