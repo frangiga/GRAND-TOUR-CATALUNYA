@@ -16,20 +16,17 @@
   --yellow-glow: #facc15;
   --yellow-soft-bg: rgba(234, 179, 8, 0.18);
 }
-
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   user-select: none;
 }
-
 html, body {
   height: 100%;
   height: 100dvh;
   overflow: hidden;
 }
-
 body {
   font-family: 'Outfit', sans-serif;
   background: var(--bg-body);
@@ -47,14 +44,12 @@ header {
   margin-bottom: 2px;
   flex-shrink: 0;
 }
-
 .lock-badge-top {
   font-size: 2.8rem;
   margin-bottom: 0px;
   filter: drop-shadow(0 0 12px rgba(250, 204, 21, 0.45));
   display: inline-block;
 }
-
 header h1 {
   font-family: 'Orbitron', sans-serif;
   font-size: 1.35rem;
@@ -65,13 +60,11 @@ header h1 {
   text-transform: uppercase;
   line-height: 1.1;
 }
-
 header p {
   color: var(--gray-muted);
   font-size: 0.8rem;
   margin-top: 1px;
 }
-
 .target-badge {
   display: inline-block;
   background: var(--yellow-soft-bg);
@@ -105,7 +98,6 @@ header p {
   gap: 12px;
   width: 100%;
 }
-
 .score-card {
   flex: 1;
   background: var(--bg-card);
@@ -117,17 +109,14 @@ header p {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
   transition: border-color 0.3s ease;
 }
-
 .score-card.player { border-color: rgba(255, 255, 255, 0.4); }
 .score-card.banca { border-color: rgba(234, 179, 8, 0.6); }
-
 .score-card .label {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 1px;
   color: var(--gray-muted);
 }
-
 .score-card .score {
   font-family: 'Orbitron', sans-serif;
   font-size: 2rem;
@@ -135,12 +124,10 @@ header p {
   line-height: 1.1;
   margin-top: 2px;
 }
-
 .score-card.player .score {
   color: #ffffff;
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
 }
-
 .score-card.banca .score {
   color: var(--yellow-glow);
   text-shadow: 0 0 12px rgba(250, 204, 21, 0.5);
@@ -176,7 +163,6 @@ header p {
   position: relative;
   box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.4);
 }
-
 .choice-display {
   display: flex;
   flex-direction: column;
@@ -184,7 +170,6 @@ header p {
   gap: 4px;
   width: 100px;
 }
-
 .choice-icon-box {
   width: 72px;
   height: 72px;
@@ -197,24 +182,20 @@ header p {
   font-size: 2.2rem;
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
-
 .choice-icon-box.active {
   border-style: solid;
   transform: scale(1.05);
 }
-
 .choice-icon-box.player-active {
   border-color: #ffffff;
   background: rgba(255, 255, 255, 0.15);
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
 }
-
 .choice-icon-box.banca-active {
   border-color: var(--yellow-main);
   background: var(--yellow-soft-bg);
   box-shadow: 0 0 18px rgba(234, 179, 8, 0.4);
 }
-
 .choice-name {
   font-size: 0.75rem;
   font-weight: 600;
@@ -247,7 +228,6 @@ header p {
   width: 100%;
   text-align: center;
 }
-
 .controls-title {
   font-size: 0.75rem;
   color: var(--gray-muted);
@@ -255,14 +235,12 @@ header p {
   text-transform: uppercase;
   letter-spacing: 1px;
 }
-
 .controls {
   display: flex;
   gap: 10px;
   width: 100%;
   justify-content: center;
 }
-
 .btn-choice {
   flex: 1;
   background: rgba(45, 50, 62, 0.95);
@@ -277,28 +255,23 @@ header p {
   transition: all 0.2s ease;
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
-
 .btn-choice:hover:not(:disabled) {
   border-color: var(--yellow-main);
   box-shadow: 0 0 15px rgba(234, 179, 8, 0.4);
   background: rgba(58, 64, 78, 0.95);
 }
-
 .btn-choice .icon {
   font-size: 1.8rem;
 }
-
 .btn-choice .btn-label {
   font-size: 0.75rem;
   font-weight: 700;
   color: var(--gray-light);
   text-transform: uppercase;
 }
-
 .btn-choice:active:not(:disabled) {
   transform: scale(0.95);
 }
-
 .btn-choice:disabled {
   opacity: 0.35;
   cursor: not-allowed;
@@ -323,12 +296,10 @@ header p {
   transition: opacity 0.4s ease;
   padding: 15px;
 }
-
 .modal-overlay.active {
   opacity: 1;
   pointer-events: all;
 }
-
 .modal-card {
   background: linear-gradient(145deg, #323745, #222632);
   border: 2px solid var(--yellow-main);
@@ -341,18 +312,15 @@ header p {
   transform: scale(0.8);
   transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
-
 .modal-overlay.active .modal-card {
   transform: scale(1);
 }
-
 .modal-card .icon-header {
   font-size: 3.8rem;
   margin-bottom: 6px;
   display: block;
   filter: drop-shadow(0 0 12px rgba(250, 204, 21, 0.35));
 }
-
 .modal-card h2 {
   font-family: 'Orbitron', sans-serif;
   color: var(--yellow-glow);
@@ -361,14 +329,12 @@ header p {
   text-transform: uppercase;
   line-height: 1.2;
 }
-
 .modal-card p {
   color: var(--gray-light);
   font-size: 0.88rem;
   line-height: 1.4;
   margin-bottom: 12px;
 }
-
 #intro-sub-line {
   font-size: 0.95rem;
   font-weight: 400;
@@ -377,7 +343,6 @@ header p {
   line-height: 1.4;
   text-transform: none;
 }
-
 #intro-sub-line strong {
   font-weight: 800;
   color: var(--yellow-glow);
@@ -392,7 +357,6 @@ header p {
   gap: 8px;
   align-items: center;
 }
-
 .access-input {
   width: 80%;
   background: rgba(15, 18, 25, 0.8);
@@ -408,12 +372,10 @@ header p {
   outline: none;
   transition: border-color 0.3s ease;
 }
-
 .access-input:focus {
   border-color: var(--yellow-main);
   box-shadow: 0 0 10px rgba(234, 179, 8, 0.3);
 }
-
 .key-error-msg {
   color: #ef4444;
   font-size: 0.78rem;
@@ -428,7 +390,6 @@ header p {
   gap: 8px;
   margin-top: 10px;
 }
-
 .btn-lang {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -443,18 +404,15 @@ header p {
   height: 52px;
   justify-content: center;
 }
-
 .btn-lang:hover {
   border-color: var(--yellow-glow);
   background: rgba(234, 179, 8, 0.15);
   transform: translateY(-2px);
 }
-
 .btn-lang .flag {
   font-size: 1.5rem;
   line-height: 1;
 }
-
 .flag-catalunya {
   width: 25px;
   height: 17px;
@@ -467,13 +425,11 @@ header p {
   padding: 1px 0;
   overflow: hidden;
 }
-
 .flag-catalunya .stripe {
   height: 2px;
   background-color: #dc2626;
   width: 100%;
 }
-
 .btn-lang .lang-name {
   font-size: 0.68rem;
   font-weight: 700;
@@ -481,20 +437,46 @@ header p {
   text-transform: uppercase;
 }
 
+/* Key Badge & Copy Button */
+.key-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 12px 0;
+}
 .key-badge {
   background: linear-gradient(90deg, #ca8a04, #eab308);
-  padding: 10px 20px;
+  padding: 10px 18px;
   border-radius: 12px;
   font-family: 'Orbitron', sans-serif;
   font-size: 1.6rem;
   font-weight: 900;
   letter-spacing: 4px;
   color: #000;
-  margin: 12px 0;
   box-shadow: 0 0 25px rgba(234, 179, 8, 0.5);
   display: inline-block;
   white-space: nowrap;
-  max-width: 100%;
+}
+.btn-copy {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--yellow-main);
+  color: var(--yellow-glow);
+  border-radius: 12px;
+  padding: 12px 14px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+.btn-copy:hover {
+  background: var(--yellow-soft-bg);
+  transform: scale(1.05);
+}
+.btn-copy:active {
+  transform: scale(0.95);
 }
 
 .btn-modal {
@@ -512,7 +494,6 @@ header p {
   letter-spacing: 1px;
   transition: transform 0.2s ease;
 }
-
 .btn-modal:active {
   transform: scale(0.96);
 }
@@ -546,26 +527,20 @@ footer {
   border-top: 1px solid rgba(255, 255, 255, 0.12);
   flex-shrink: 0;
 }
-
 footer a {
   color: var(--gray-muted);
   text-decoration: none;
   transition: color 0.2s ease;
   text-transform: none !important;
 }
-
 footer a:hover {
   color: var(--yellow-glow);
   text-shadow: 0 0 8px rgba(234, 179, 8, 0.5);
 }
-
-/* Primer elemento asignado al tercio izquierdo y centrado en él */
 footer a.link-paterna {
   grid-column: 1;
   text-align: center;
 }
-
-/* Segundo elemento asignado al tercio derecho y centrado en él */
 footer a.link-nick {
   grid-column: 3;
   text-align: center;
@@ -584,15 +559,7 @@ footer a.link-nick {
     <p style="font-size: 0.8rem; color: var(--gray-muted); margin-bottom: 6px;">CHOOSE YOUR LANGUAGE TO START:</p>
     <div class="language-grid">
       <!-- Fila 1 -->
-      <button class="btn-lang" onclick="selectLanguage('ca')">
-        <span class="flag-catalunya">
-          <span class="stripe"></span>
-          <span class="stripe"></span>
-          <span class="stripe"></span>
-          <span class="stripe"></span>
-        </span>
-        <span class="lang-name">CATALÀ</span>
-      </button>
+      <button class="btn-lang" onclick="selectLanguage('ca')"><span class="flag-catalunya"><span class="stripe"></span><span class="stripe"></span><span class="stripe"></span><span class="stripe"></span></span><span class="lang-name">CATALÀ</span></button>
       <button class="btn-lang" onclick="selectLanguage('es')"><span class="flag">🇪🇸</span><span class="lang-name">CASTELLANO</span></button>
       <button class="btn-lang" onclick="selectLanguage('en')"><span class="flag">🇬🇧</span><span class="lang-name">ENGLISH</span></button>
       <!-- Fila 2 -->
@@ -674,9 +641,18 @@ footer a.link-nick {
   <div class="controls-wrapper">
     <div class="controls-title" id="ctrl-title">SELECCIONA TU JUGADA</div>
     <div class="controls">
-      <button class="btn-choice" onclick="playRound('rock')"><span class="icon">💎</span><span class="btn-label" id="btn-rock">PIEDRA</span></button>
-      <button class="btn-choice" onclick="playRound('paper')"><span class="icon">📄</span><span class="btn-label" id="btn-paper">PAPEL</span></button>
-      <button class="btn-choice" onclick="playRound('scissors')"><span class="icon">✂️</span><span class="btn-label" id="btn-scissors">TIJERA</span></button>
+      <button class="btn-choice" onclick="playRound('rock')">
+        <span class="icon">💎</span>
+        <span class="btn-label" id="btn-rock">PIEDRA</span>
+      </button>
+      <button class="btn-choice" onclick="playRound('paper')">
+        <span class="icon">📄</span>
+        <span class="btn-label" id="btn-paper">PAPEL</span>
+      </button>
+      <button class="btn-choice" onclick="playRound('scissors')">
+        <span class="icon">✂️</span>
+        <span class="btn-label" id="btn-scissors">TIJERA</span>
+      </button>
     </div>
   </div>
 </div>
@@ -692,10 +668,15 @@ footer a.link-nick {
   <div class="modal-card">
     <span class="icon-header">🔓</span>
     <h2 style="color: #4ade80;" id="vic-title">¡ENHORABUENA! 🎉</h2>
-    <p style="color: var(--gray-muted); font-size: 0.85rem; margin-bottom: 5px;"><span id="vic-sub">HAS DERROTADO A LA BANCA 6 A</span> <span id="final-banca-score">0</span></p>
+    <p style="color: var(--gray-muted); font-size: 0.85rem; margin-bottom: 5px;">
+      <span id="vic-sub">HAS DERROTADO A LA BANCA 6 A</span> <span id="final-banca-score">0</span>
+    </p>
     <div style="margin-top: 8px;">
       <span style="font-size: 0.85rem; color: var(--gray-light); text-transform: uppercase; font-weight: 600;" id="vic-combo-lbl">LA COMBINACIÓN ES:</span><br>
-      <div class="key-badge">2019</div>
+      <div class="key-container">
+        <div class="key-badge" id="final-code">2019</div>
+        <button class="btn-copy" id="btn-copy" onclick="copyToClipboard()" title="Copiar al portapapeles">📋</button>
+      </div>
     </div>
     <button class="btn-modal" id="btn-replay" onclick="resetGameFull()">JUGAR DE NUEVO</button>
   </div>
@@ -733,11 +714,12 @@ const translations = {
     vicTitle: "ENHORABONA! 🎉",
     vicSub: "HAS DERROTAT LA BANCA 6 A",
     vicComboLbl: "LA COMBINACIÓ ÉS:",
-    btnReplay: "JUGAR DE NOU"
+    btnReplay: "JUGAR DE NOU",
+    copied: "¡COPIAT!"
   },
   es: {
     subtitle: "PIEDRA, PAPEL O TIJERA",
-    targetBadge: "GANA 6 PARTIDES A LA BANCA",
+    targetBadge: "GANA 6 PARTIDAS A LA BANCA",
     keyTitle: "CLAVE DE ACCESO",
     keyDesc: "INTRODUCE LA PALABRA GRABADA EN EL CONTENEDOR:",
     keyBtn: "VERIFICAR",
@@ -761,10 +743,11 @@ const translations = {
     beats: "VENCE A",
     bankReachedTarget: "¡LA BANCA HA ALCANZADO 6 PUNTOS! REINICIANDO...",
     restarted: "JUEGO REINICIADO. ¡INTÉNTALO DE NUEVO!",
-    vicTitle: "¡ENHORABUNA! 🎉",
+    vicTitle: "¡ENHORABUENA! 🎉",
     vicSub: "HAS DERROTADO A LA BANCA 6 A",
     vicComboLbl: "LA COMBINACIÓN ES:",
-    btnReplay: "JUGAR DE NUEVO"
+    btnReplay: "JUGAR DE NUEVO",
+    copied: "¡COPIADO!"
   },
   en: {
     subtitle: "ROCK, PAPER, SCISSORS",
@@ -795,7 +778,8 @@ const translations = {
     vicTitle: "CONGRATULATIONS! 🎉",
     vicSub: "YOU BEAT THE BANK 6 TO",
     vicComboLbl: "THE COMBINATION IS:",
-    btnReplay: "PLAY AGAIN"
+    btnReplay: "PLAY AGAIN",
+    copied: "COPIED!"
   },
   fr: {
     subtitle: "PIERRE, PAPIER, CISEAUX",
@@ -826,7 +810,8 @@ const translations = {
     vicTitle: "FÉLICITATIONS ! 🎉",
     vicSub: "VOUS AVEZ BATTU LA BANQUE 6 À",
     vicComboLbl: "LA COMBINAISON EST :",
-    btnReplay: "REJOUER"
+    btnReplay: "REJOUER",
+    copied: "COPIÉ !"
   },
   de: {
     subtitle: "SCHERE, STEIN, PAPIER",
@@ -857,7 +842,8 @@ const translations = {
     vicTitle: "HERZLICHEN GLÜCKWUNSCH! 🎉",
     vicSub: "DU HAST DIE BANK 6 ZU",
     vicComboLbl: "DIE KOMBINATION LAUTET:",
-    btnReplay: "ERNEUT SPIELEN"
+    btnReplay: "ERNEUT SPIELEN",
+    copied: "KOPIERT!"
   },
   pt: {
     subtitle: "PEDRA, PAPEL E TESOURA",
@@ -888,7 +874,8 @@ const translations = {
     vicTitle: "PARABÉNS! 🎉",
     vicSub: "VOCÊ DERROTOU A BANCA 6 A",
     vicComboLbl: "A COMBINAÇÃO É:",
-    btnReplay: "JOGAR NOVAMENTE"
+    btnReplay: "JOGAR NOVAMENTE",
+    copied: "COPIADO!"
   },
   nl: {
     subtitle: "STEEN, PAPIER, SCHAAR",
@@ -919,7 +906,8 @@ const translations = {
     vicTitle: "GEFELICITEERD! 🎉",
     vicSub: "JE HEEFT DE BANK VERSLAGEN MET 6 TEGEN",
     vicComboLbl: "DE COMBINATIE IS:",
-    btnReplay: "OPNIEUW SPIELEN"
+    btnReplay: "OPNIEUW SPIELEN",
+    copied: "GEKOPIEERD!"
   },
   it: {
     subtitle: "SASSO, CARTA, FORBICE",
@@ -950,7 +938,8 @@ const translations = {
     vicTitle: "CONGRATULAZIONI! 🎉",
     vicSub: "HAI BATTUTO LA BANCA 6 A",
     vicComboLbl: "LA COMBINAZIONE È:",
-    btnReplay: "GIOCA DI NUOVO"
+    btnReplay: "GIOCA DI NUOVO",
+    copied: "COPIATO!"
   },
   sv: {
     subtitle: "STEN, SAX, PÅSE",
@@ -981,7 +970,8 @@ const translations = {
     vicTitle: "GRATTIS! 🎉",
     vicSub: "DU BESEGRADE BANKEN MED 6 MOT",
     vicComboLbl: "KOMBINATIONEN ÄR:",
-    btnReplay: "SPELA IGEN"
+    btnReplay: "SPELA IGEN",
+    copied: "KOPIERAD!"
   },
   pl: {
     subtitle: "KAMIEŃ, PAPIER, NOŻYCE",
@@ -1012,7 +1002,8 @@ const translations = {
     vicTitle: "GRATULACJE! 🎉",
     vicSub: "POKONAŁEŚ BANK 6 DO",
     vicComboLbl: "KOMBINACJA TO:",
-    btnReplay: "ZAGRAJ PONOWNIE"
+    btnReplay: "ZAGRAJ PONOWNIE",
+    copied: "SKOPIOWANO!"
   },
   cs: {
     subtitle: "KÁMEN, NŮŽKY, PAPÍR",
@@ -1043,7 +1034,8 @@ const translations = {
     vicTitle: "GRATULUJEME! 🎉",
     vicSub: "PORAZIL JSTE BANKU 6 KU",
     vicComboLbl: "KOMBINACE JE:",
-    btnReplay: "HRÁT ZNOVU"
+    btnReplay: "HRÁT ZNOVU",
+    copied: "ZSKOPIROVÁNO!"
   },
   ja: {
     subtitle: "じゃんけん (JANKEN)",
@@ -1074,7 +1066,8 @@ const translations = {
     vicTitle: "おめでとうございます！ 🎉",
     vicSub: "バンクに 6 対 で勝利しました:",
     vicComboLbl: "解錠コードは:",
-    btnReplay: "もう一度プレイ"
+    btnReplay: "もう一度プレイ",
+    copied: "コピーしました！"
   }
 };
 
@@ -1093,7 +1086,6 @@ function selectLanguage(lang) {
   document.getElementById('intro-single-line').innerText = t.introLine;
   document.getElementById('intro-sub-line').innerHTML = t.introSubLine;
   document.getElementById('btn-accept-intro').innerText = t.btnAccept;
-  
   document.getElementById('lbl-player').innerText = t.lblPlayer;
   document.getElementById('lbl-banca').innerText = t.lblBanca;
   document.getElementById('player-choice-name').innerText = t.waiting;
@@ -1144,6 +1136,33 @@ document.getElementById('access-key-input').addEventListener('keypress', functio
     checkAccessKey();
   }
 });
+
+function copyToClipboard() {
+  const code = document.getElementById('final-code').innerText;
+  const btnCopy = document.getElementById('btn-copy');
+  const t = translations[currentLang];
+
+  navigator.clipboard.writeText(code).then(() => {
+    playSound('click');
+    btnCopy.innerText = "✅";
+    setTimeout(() => {
+      btnCopy.innerText = "📋";
+    }, 2000);
+  }).catch(() => {
+    // Fallback por si la API Clipboard falla
+    const textArea = document.createElement("textarea");
+    textArea.value = code;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textArea);
+    playSound('click');
+    btnCopy.innerText = "✅";
+    setTimeout(() => {
+      btnCopy.innerText = "📋";
+    }, 2000);
+  });
+}
 
 const AudioCtx = window.AudioContext || window.webkitAudioContext;
 let audioCtx;
