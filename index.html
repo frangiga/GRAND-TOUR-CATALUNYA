@@ -36,8 +36,6 @@ body {
   justify-content: space-between;
   padding: 10px 12px 6px 12px;
 }
-
-/* Header */
 header {
   text-align: center;
   margin-top: 0px;
@@ -76,8 +74,6 @@ header p {
   font-weight: 600;
   margin-top: 4px;
 }
-
-/* Main Game Layout Container */
 .game-container {
   flex: 1;
   display: flex;
@@ -89,8 +85,6 @@ header p {
   margin: 0 auto;
   min-height: 0;
 }
-
-/* Scoreboard */
 .scoreboard-container {
   display: flex;
   justify-content: center;
@@ -132,7 +126,6 @@ header p {
   color: var(--yellow-glow);
   text-shadow: 0 0 12px rgba(250, 204, 21, 0.5);
 }
-
 .vs-circle {
   font-family: 'Orbitron', sans-serif;
   font-weight: 900;
@@ -149,8 +142,6 @@ header p {
   box-shadow: 0 0 10px rgba(234, 179, 8, 0.3);
   flex-shrink: 0;
 }
-
-/* Arena Display */
 .arena {
   width: 100%;
   background: var(--bg-card);
@@ -202,8 +193,6 @@ header p {
   color: var(--gray-muted);
   text-transform: uppercase;
 }
-
-/* Status Banner */
 .status-message {
   position: absolute;
   bottom: -12px;
@@ -222,8 +211,6 @@ header p {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
-/* Controls / Buttons */
 .controls-wrapper {
   width: 100%;
   text-align: center;
@@ -277,8 +264,6 @@ header p {
   cursor: not-allowed;
   filter: grayscale(0.8);
 }
-
-/* Modals */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -348,8 +333,6 @@ header p {
   color: var(--yellow-glow);
   text-transform: uppercase;
 }
-
-/* Input Contraseña */
 .access-input-group {
   margin: 12px 0 5px 0;
   display: flex;
@@ -382,8 +365,6 @@ header p {
   font-weight: 600;
   min-height: 1.2em;
 }
-
-/* Idiomas Flag Grid 3x4 Matriz Ajustada */
 .language-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -436,9 +417,7 @@ header p {
   color: var(--gray-light);
   text-transform: uppercase;
 }
-
-/* Key Badge & Copy Button */
-.key-container {
+.key-badge-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -447,7 +426,7 @@ header p {
 }
 .key-badge {
   background: linear-gradient(90deg, #ca8a04, #eab308);
-  padding: 10px 18px;
+  padding: 10px 20px;
   border-radius: 12px;
   font-family: 'Orbitron', sans-serif;
   font-size: 1.6rem;
@@ -463,9 +442,9 @@ header p {
   border: 1px solid var(--yellow-main);
   color: var(--yellow-glow);
   border-radius: 12px;
-  padding: 12px 14px;
+  padding: 12px;
   cursor: pointer;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -478,7 +457,12 @@ header p {
 .btn-copy:active {
   transform: scale(0.95);
 }
-
+.victory-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 14px;
+}
 .btn-modal {
   background: linear-gradient(90deg, var(--yellow-main), #d97706);
   color: #000;
@@ -488,23 +472,30 @@ header p {
   font-weight: 800;
   border-radius: 12px;
   cursor: pointer;
-  margin-top: 4px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.4);
   text-transform: uppercase;
   letter-spacing: 1px;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, background 0.2s ease;
+  text-decoration: none;
+  display: inline-block;
 }
 .btn-modal:active {
   transform: scale(0.96);
 }
-
+.btn-certitude {
+  background: linear-gradient(90deg, #2563eb, #1d4ed8);
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+}
+.btn-certitude:hover {
+  background: linear-gradient(90deg, #3b82f6, #2563eb);
+}
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
   20%, 60% { transform: translateX(-8px); }
   40%, 80% { transform: translateX(8px); }
 }
 .shake { animation: shake 0.5s ease-in-out; }
-
 #canvas-confetti {
   position: fixed;
   top: 0;
@@ -514,8 +505,6 @@ header p {
   pointer-events: none;
   z-index: 999;
 }
-
-/* Footer / Firma con distribución en 3 tercios */
 footer {
   width: 100%;
   display: grid;
@@ -548,29 +537,24 @@ footer a.link-nick {
 </style>
 </head>
 <body>
-
 <canvas id="canvas-confetti"></canvas>
 
-<!-- 1. Modal de Selección de Idioma (Matriz 3x4) -->
+<!-- 1. Modal de Selección de Idioma -->
 <div class="modal-overlay active" id="lang-modal">
   <div class="modal-card">
     <span class="icon-header">🌍</span>
     <h2>SELECT LANGUAGE</h2>
     <p style="font-size: 0.8rem; color: var(--gray-muted); margin-bottom: 6px;">CHOOSE YOUR LANGUAGE TO START:</p>
     <div class="language-grid">
-      <!-- Fila 1 -->
       <button class="btn-lang" onclick="selectLanguage('ca')"><span class="flag-catalunya"><span class="stripe"></span><span class="stripe"></span><span class="stripe"></span><span class="stripe"></span></span><span class="lang-name">CATALÀ</span></button>
       <button class="btn-lang" onclick="selectLanguage('es')"><span class="flag">🇪🇸</span><span class="lang-name">CASTELLANO</span></button>
       <button class="btn-lang" onclick="selectLanguage('en')"><span class="flag">🇬🇧</span><span class="lang-name">ENGLISH</span></button>
-      <!-- Fila 2 -->
       <button class="btn-lang" onclick="selectLanguage('fr')"><span class="flag">🇫🇷</span><span class="lang-name">FRANÇAIS</span></button>
       <button class="btn-lang" onclick="selectLanguage('de')"><span class="flag">🇩🇪</span><span class="lang-name">DEUTSCH</span></button>
       <button class="btn-lang" onclick="selectLanguage('pt')"><span class="flag">🇵🇹</span><span class="lang-name">PORTUGUÊS</span></button>
-      <!-- Fila 3 -->
       <button class="btn-lang" onclick="selectLanguage('nl')"><span class="flag">🇳🇱</span><span class="lang-name">NEDERLANDS</span></button>
       <button class="btn-lang" onclick="selectLanguage('it')"><span class="flag">🇮🇹</span><span class="lang-name">ITALIANO</span></button>
       <button class="btn-lang" onclick="selectLanguage('sv')"><span class="flag">🇸🇪</span><span class="lang-name">SVENSKA</span></button>
-      <!-- Fila 4 -->
       <button class="btn-lang" onclick="selectLanguage('pl')"><span class="flag">🇵🇱</span><span class="lang-name">POLSKI</span></button>
       <button class="btn-lang" onclick="selectLanguage('cs')"><span class="flag">🇨🇿</span><span class="lang-name">ČEŠTINA</span></button>
       <button class="btn-lang" onclick="selectLanguage('ja')"><span class="flag">🇯🇵</span><span class="lang-name">日本語</span></button>
@@ -611,7 +595,6 @@ footer a.link-nick {
 </header>
 
 <div class="game-container">
-  <!-- Scoreboard -->
   <div class="scoreboard-container">
     <div class="score-card player">
       <div class="label" id="lbl-player">JUGADOR</div>
@@ -624,7 +607,6 @@ footer a.link-nick {
     </div>
   </div>
 
-  <!-- Battle Arena -->
   <div class="arena" id="arena-box">
     <div class="choice-display">
       <div class="choice-icon-box" id="player-box">❓</div>
@@ -637,27 +619,16 @@ footer a.link-nick {
     <div class="status-message" id="status-msg">¡ELIGE TU MOVIMIENTO PARA EMPEZAR!</div>
   </div>
 
-  <!-- Controls -->
   <div class="controls-wrapper">
     <div class="controls-title" id="ctrl-title">SELECCIONA TU JUGADA</div>
     <div class="controls">
-      <button class="btn-choice" onclick="playRound('rock')">
-        <span class="icon">💎</span>
-        <span class="btn-label" id="btn-rock">PIEDRA</span>
-      </button>
-      <button class="btn-choice" onclick="playRound('paper')">
-        <span class="icon">📄</span>
-        <span class="btn-label" id="btn-paper">PAPEL</span>
-      </button>
-      <button class="btn-choice" onclick="playRound('scissors')">
-        <span class="icon">✂️</span>
-        <span class="btn-label" id="btn-scissors">TIJERA</span>
-      </button>
+      <button class="btn-choice" onclick="playRound('rock')"><span class="icon">💎</span><span class="btn-label" id="btn-rock">PIEDRA</span></button>
+      <button class="btn-choice" onclick="playRound('paper')"><span class="icon">📄</span><span class="btn-label" id="btn-paper">PAPEL</span></button>
+      <button class="btn-choice" onclick="playRound('scissors')"><span class="icon">✂️</span><span class="btn-label" id="btn-scissors">TIJERA</span></button>
     </div>
   </div>
 </div>
 
-<!-- FIRMA PIE DE PÁGINA (Reajustada por tercios) -->
 <footer>
   <a href="https://www.geocaching.com/plan/lists/BMFC2Z7" target="_blank" rel="noopener noreferrer" class="link-paterna">GeoPaterna</a>
   <a href="https://www.geocaching.com/p/?guid=8aa34b6e-769c-42e2-ab66-4163f9a40e13&wid=9b106a24-4eef-41ab-8a06-c207d4143cb1&ds=2" target="_blank" rel="noopener noreferrer" class="link-nick">fran_giga</a>
@@ -668,22 +639,24 @@ footer a.link-nick {
   <div class="modal-card">
     <span class="icon-header">🔓</span>
     <h2 style="color: #4ade80;" id="vic-title">¡ENHORABUENA! 🎉</h2>
-    <p style="color: var(--gray-muted); font-size: 0.85rem; margin-bottom: 5px;">
-      <span id="vic-sub">HAS DERROTADO A LA BANCA 6 A</span> <span id="final-banca-score">0</span>
-    </p>
+    <p style="color: var(--gray-muted); font-size: 0.85rem; margin-bottom: 5px;"><span id="vic-sub">HAS DERROTADO A LA BANCA 6 A</span> <span id="final-banca-score">0</span></p>
+    
     <div style="margin-top: 8px;">
       <span style="font-size: 0.85rem; color: var(--gray-light); text-transform: uppercase; font-weight: 600;" id="vic-combo-lbl">LA COMBINACIÓN ES:</span><br>
-      <div class="key-container">
-        <div class="key-badge" id="final-code">2019</div>
-        <button class="btn-copy" id="btn-copy" onclick="copyToClipboard()" title="Copiar al portapapeles">📋</button>
+      <div class="key-badge-container">
+        <div class="key-badge" id="secret-key-badge">2019</div>
+        <button class="btn-copy" id="btn-copy-key" onclick="copyKey()" title="Copiar clave">📋</button>
       </div>
     </div>
-    <button class="btn-modal" id="btn-replay" onclick="resetGameFull()">JUGAR DE NUEVO</button>
+
+    <div class="victory-actions">
+      <a href="https://www.certitudes.org/certitude?wp=GCBVFN3" target="_blank" rel="noopener noreferrer" class="btn-modal btn-certitude" id="btn-certitude">IR AL CERTITUDE</a>
+      <button class="btn-modal" id="btn-replay" onclick="resetGameFull()">JUGAR DE NUEVO</button>
+    </div>
   </div>
 </div>
 
 <script>
-// Diccionario completo de 12 idiomas
 const translations = {
   ca: {
     subtitle: "PEDRA, PAPER O TISORA",
@@ -714,8 +687,8 @@ const translations = {
     vicTitle: "ENHORABONA! 🎉",
     vicSub: "HAS DERROTAT LA BANCA 6 A",
     vicComboLbl: "LA COMBINACIÓ ÉS:",
-    btnReplay: "JUGAR DE NOU",
-    copied: "¡COPIAT!"
+    btnCertitude: "ANAR AL CERTITUDE",
+    btnReplay: "JUGAR DE NOU"
   },
   es: {
     subtitle: "PIEDRA, PAPEL O TIJERA",
@@ -746,8 +719,8 @@ const translations = {
     vicTitle: "¡ENHORABUENA! 🎉",
     vicSub: "HAS DERROTADO A LA BANCA 6 A",
     vicComboLbl: "LA COMBINACIÓN ES:",
-    btnReplay: "JUGAR DE NUEVO",
-    copied: "¡COPIADO!"
+    btnCertitude: "IR AL CERTITUDE",
+    btnReplay: "JUGAR DE NUEVO"
   },
   en: {
     subtitle: "ROCK, PAPER, SCISSORS",
@@ -778,8 +751,8 @@ const translations = {
     vicTitle: "CONGRATULATIONS! 🎉",
     vicSub: "YOU BEAT THE BANK 6 TO",
     vicComboLbl: "THE COMBINATION IS:",
-    btnReplay: "PLAY AGAIN",
-    copied: "COPIED!"
+    btnCertitude: "GO TO CERTITUDE",
+    btnReplay: "PLAY AGAIN"
   },
   fr: {
     subtitle: "PIERRE, PAPIER, CISEAUX",
@@ -810,8 +783,8 @@ const translations = {
     vicTitle: "FÉLICITATIONS ! 🎉",
     vicSub: "VOUS AVEZ BATTU LA BANQUE 6 À",
     vicComboLbl: "LA COMBINAISON EST :",
-    btnReplay: "REJOUER",
-    copied: "COPIÉ !"
+    btnCertitude: "ALLER SUR CERTITUDE",
+    btnReplay: "REJOUER"
   },
   de: {
     subtitle: "SCHERE, STEIN, PAPIER",
@@ -842,8 +815,8 @@ const translations = {
     vicTitle: "HERZLICHEN GLÜCKWUNSCH! 🎉",
     vicSub: "DU HAST DIE BANK 6 ZU",
     vicComboLbl: "DIE KOMBINATION LAUTET:",
-    btnReplay: "ERNEUT SPIELEN",
-    copied: "KOPIERT!"
+    btnCertitude: "ZU CERTITUDE GEHEN",
+    btnReplay: "ERNEUT SPIELEN"
   },
   pt: {
     subtitle: "PEDRA, PAPEL E TESOURA",
@@ -874,8 +847,8 @@ const translations = {
     vicTitle: "PARABÉNS! 🎉",
     vicSub: "VOCÊ DERROTOU A BANCA 6 A",
     vicComboLbl: "A COMBINAÇÃO É:",
-    btnReplay: "JOGAR NOVAMENTE",
-    copied: "COPIADO!"
+    btnCertitude: "IR PARA O CERTITUDE",
+    btnReplay: "JOGAR NOVAMENTE"
   },
   nl: {
     subtitle: "STEEN, PAPIER, SCHAAR",
@@ -906,8 +879,8 @@ const translations = {
     vicTitle: "GEFELICITEERD! 🎉",
     vicSub: "JE HEEFT DE BANK VERSLAGEN MET 6 TEGEN",
     vicComboLbl: "DE COMBINATIE IS:",
-    btnReplay: "OPNIEUW SPIELEN",
-    copied: "GEKOPIEERD!"
+    btnCertitude: "GA NAAR CERTITUDE",
+    btnReplay: "OPNIEUW SPEELEN"
   },
   it: {
     subtitle: "SASSO, CARTA, FORBICE",
@@ -938,8 +911,8 @@ const translations = {
     vicTitle: "CONGRATULAZIONI! 🎉",
     vicSub: "HAI BATTUTO LA BANCA 6 A",
     vicComboLbl: "LA COMBINAZIONE È:",
-    btnReplay: "GIOCA DI NUOVO",
-    copied: "COPIATO!"
+    btnCertitude: "VAI SU CERTITUDE",
+    btnReplay: "GIOCA DI NUOVO"
   },
   sv: {
     subtitle: "STEN, SAX, PÅSE",
@@ -970,8 +943,8 @@ const translations = {
     vicTitle: "GRATTIS! 🎉",
     vicSub: "DU BESEGRADE BANKEN MED 6 MOT",
     vicComboLbl: "KOMBINATIONEN ÄR:",
-    btnReplay: "SPELA IGEN",
-    copied: "KOPIERAD!"
+    btnCertitude: "GÅ TILL CERTITUDE",
+    btnReplay: "SPELA IGEN"
   },
   pl: {
     subtitle: "KAMIEŃ, PAPIER, NOŻYCE",
@@ -1002,8 +975,8 @@ const translations = {
     vicTitle: "GRATULACJE! 🎉",
     vicSub: "POKONAŁEŚ BANK 6 DO",
     vicComboLbl: "KOMBINACJA TO:",
-    btnReplay: "ZAGRAJ PONOWNIE",
-    copied: "SKOPIOWANO!"
+    btnCertitude: "PRZEJDŹ DO CERTITUDE",
+    btnReplay: "ZAGRAJ PONOWNIE"
   },
   cs: {
     subtitle: "KÁMEN, NŮŽKY, PAPÍR",
@@ -1034,8 +1007,8 @@ const translations = {
     vicTitle: "GRATULUJEME! 🎉",
     vicSub: "PORAZIL JSTE BANKU 6 KU",
     vicComboLbl: "KOMBINACE JE:",
-    btnReplay: "HRÁT ZNOVU",
-    copied: "ZSKOPIROVÁNO!"
+    btnCertitude: "PŘEJDÍT NA CERTITUDE",
+    btnReplay: "HRÁT ZNOVU"
   },
   ja: {
     subtitle: "じゃんけん (JANKEN)",
@@ -1066,8 +1039,8 @@ const translations = {
     vicTitle: "おめでとうございます！ 🎉",
     vicSub: "バンクに 6 対 で勝利しました:",
     vicComboLbl: "解錠コードは:",
-    btnReplay: "もう一度プレイ",
-    copied: "コピーしました！"
+    btnCertitude: "CERTITUDEへ移動",
+    btnReplay: "もう一度プレイ"
   }
 };
 
@@ -1077,7 +1050,6 @@ const ACCESS_SECRET = "ROSCAS";
 function selectLanguage(lang) {
   currentLang = lang;
   const t = translations[lang];
-
   document.getElementById('sub-header-title').innerText = t.subtitle;
   document.getElementById('target-badge-text').innerText = t.targetBadge;
   document.getElementById('key-title').innerText = t.keyTitle;
@@ -1098,12 +1070,13 @@ function selectLanguage(lang) {
   document.getElementById('vic-title').innerText = t.vicTitle;
   document.getElementById('vic-sub').innerText = t.vicSub;
   document.getElementById('vic-combo-lbl').innerText = t.vicComboLbl;
+  document.getElementById('btn-certitude').innerText = t.btnCertitude;
   document.getElementById('btn-replay').innerText = t.btnReplay;
-
+  
   moveData.rock.name = t.rock;
   moveData.paper.name = t.paper;
   moveData.scissors.name = t.scissors;
-
+  
   playSound('click');
   document.getElementById('lang-modal').classList.remove('active');
   document.getElementById('key-modal').classList.add('active');
@@ -1117,7 +1090,7 @@ function checkAccessKey() {
   const t = translations[currentLang];
   const errorElement = document.getElementById('key-error');
   const cardElement = document.getElementById('key-modal-card');
-
+  
   if (inputVal === ACCESS_SECRET) {
     playSound('win');
     errorElement.innerText = '';
@@ -1137,33 +1110,6 @@ document.getElementById('access-key-input').addEventListener('keypress', functio
   }
 });
 
-function copyToClipboard() {
-  const code = document.getElementById('final-code').innerText;
-  const btnCopy = document.getElementById('btn-copy');
-  const t = translations[currentLang];
-
-  navigator.clipboard.writeText(code).then(() => {
-    playSound('click');
-    btnCopy.innerText = "✅";
-    setTimeout(() => {
-      btnCopy.innerText = "📋";
-    }, 2000);
-  }).catch(() => {
-    // Fallback por si la API Clipboard falla
-    const textArea = document.createElement("textarea");
-    textArea.value = code;
-    document.body.appendChild(textArea);
-    textArea.select();
-    document.execCommand("copy");
-    document.body.removeChild(textArea);
-    playSound('click');
-    btnCopy.innerText = "✅";
-    setTimeout(() => {
-      btnCopy.innerText = "📋";
-    }, 2000);
-  });
-}
-
 const AudioCtx = window.AudioContext || window.webkitAudioContext;
 let audioCtx;
 
@@ -1174,12 +1120,10 @@ function initAudio() {
 function playSound(type) {
   initAudio();
   if (!audioCtx) return;
-
   const osc = audioCtx.createOscillator();
   const gain = audioCtx.createGain();
   osc.connect(gain);
   gain.connect(audioCtx.destination);
-
   const now = audioCtx.currentTime;
 
   if (type === 'click') {
@@ -1263,7 +1207,6 @@ function playRound(playerChoice) {
 
   playerBox.className = 'choice-icon-box active player-active';
   bancaBox.className = 'choice-icon-box active banca-active';
-
   playerBox.innerText = '✊';
   bancaBox.innerText = '✊';
   playerChoiceName.innerText = t.thinking;
@@ -1275,7 +1218,6 @@ function playRound(playerChoice) {
     step++;
     playerBox.style.transform = `translateY(${step % 2 === 0 ? -6 : 0}px) scale(1.05)`;
     bancaBox.style.transform = `translateY(${step % 2 === 0 ? -6 : 0}px) scale(1.05)`;
-
     if (step >= 6) {
       clearInterval(interval);
       resolveRound(playerChoice);
@@ -1339,12 +1281,23 @@ function handleVictory() {
   document.getElementById('victory-modal').classList.add('active');
 }
 
+function copyKey() {
+  const keyText = document.getElementById('secret-key-badge').innerText;
+  navigator.clipboard.writeText(keyText).then(() => {
+    const copyBtn = document.getElementById('btn-copy-key');
+    copyBtn.innerText = '✅';
+    playSound('click');
+    setTimeout(() => {
+      copyBtn.innerText = '📋';
+    }, 1500);
+  });
+}
+
 function handleDefeat() {
   const t = translations[currentLang];
   playSound('reset');
   const arenaBox = document.getElementById('arena-box');
   arenaBox.classList.add('shake');
-
   const statusMsg = document.getElementById('status-msg');
   statusMsg.innerText = t.bankReachedTarget;
   statusMsg.style.background = 'linear-gradient(90deg, #7f1d1d, #b91c1c)';
@@ -1391,12 +1344,12 @@ function setButtonsDisabled(disabled) {
 }
 
 let confettiAnimationId;
+
 function startConfetti() {
   const canvas = document.getElementById('canvas-confetti');
   const ctx = canvas.getContext('2d');
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
-
   const particles = [];
   const colors = ['#eab308', '#facc15', '#ffffff', '#cbd5e1', '#ca8a04'];
 
@@ -1419,12 +1372,10 @@ function startConfetti() {
       p.y += p.speedY;
       p.x += p.speedX;
       p.angle += p.spin;
-
       if (p.y > canvas.height) {
         p.y = -10;
         p.x = Math.random() * canvas.width;
       }
-
       ctx.save();
       ctx.translate(p.x, p.y);
       ctx.rotate(p.angle);
