@@ -36,6 +36,7 @@ body {
   justify-content: space-between;
   padding: 10px 12px 6px 12px;
 }
+/* Header */
 header {
   text-align: center;
   margin-top: 0px;
@@ -74,6 +75,7 @@ header p {
   font-weight: 600;
   margin-top: 4px;
 }
+/* Main Game Layout Container */
 .game-container {
   flex: 1;
   display: flex;
@@ -85,6 +87,7 @@ header p {
   margin: 0 auto;
   min-height: 0;
 }
+/* Scoreboard */
 .scoreboard-container {
   display: flex;
   justify-content: center;
@@ -142,6 +145,7 @@ header p {
   box-shadow: 0 0 10px rgba(234, 179, 8, 0.3);
   flex-shrink: 0;
 }
+/* Arena Display */
 .arena {
   width: 100%;
   background: var(--bg-card);
@@ -193,6 +197,7 @@ header p {
   color: var(--gray-muted);
   text-transform: uppercase;
 }
+/* Status Banner */
 .status-message {
   position: absolute;
   bottom: -12px;
@@ -211,6 +216,7 @@ header p {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+/* Controls / Buttons */
 .controls-wrapper {
   width: 100%;
   text-align: center;
@@ -264,6 +270,7 @@ header p {
   cursor: not-allowed;
   filter: grayscale(0.8);
 }
+/* Modals */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -333,6 +340,7 @@ header p {
   color: var(--yellow-glow);
   text-transform: uppercase;
 }
+/* Input Contraseña */
 .access-input-group {
   margin: 12px 0 5px 0;
   display: flex;
@@ -365,6 +373,7 @@ header p {
   font-weight: 600;
   min-height: 1.2em;
 }
+/* Idiomas Flag Grid 3x4 Matriz Ajustada */
 .language-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -417,13 +426,6 @@ header p {
   color: var(--gray-light);
   text-transform: uppercase;
 }
-.key-badge-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  margin: 12px 0;
-}
 .key-badge {
   background: linear-gradient(90deg, #ca8a04, #eab308);
   padding: 10px 20px;
@@ -433,35 +435,11 @@ header p {
   font-weight: 900;
   letter-spacing: 4px;
   color: #000;
+  margin: 12px 0;
   box-shadow: 0 0 25px rgba(234, 179, 8, 0.5);
   display: inline-block;
   white-space: nowrap;
-}
-.btn-copy {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid var(--yellow-main);
-  color: var(--yellow-glow);
-  border-radius: 12px;
-  padding: 12px;
-  cursor: pointer;
-  font-size: 1.2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-}
-.btn-copy:hover {
-  background: var(--yellow-soft-bg);
-  transform: scale(1.05);
-}
-.btn-copy:active {
-  transform: scale(0.95);
-}
-.victory-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: 14px;
+  max-width: 100%;
 }
 .btn-modal {
   background: linear-gradient(90deg, var(--yellow-main), #d97706);
@@ -472,23 +450,29 @@ header p {
   font-weight: 800;
   border-radius: 12px;
   cursor: pointer;
+  margin-top: 4px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.4);
   text-transform: uppercase;
   letter-spacing: 1px;
-  transition: transform 0.2s ease, background 0.2s ease;
-  text-decoration: none;
-  display: inline-block;
+  transition: transform 0.2s ease;
 }
 .btn-modal:active {
   transform: scale(0.96);
 }
+.btn-certitude-link {
+  display: block;
+  width: 100%;
+  text-decoration: none;
+  margin-top: 10px;
+}
 .btn-certitude {
-  background: linear-gradient(90deg, #2563eb, #1d4ed8);
-  color: #fff;
-  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+  width: 100%;
+  background: linear-gradient(90deg, #10b981, #059669);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
 }
 .btn-certitude:hover {
-  background: linear-gradient(90deg, #3b82f6, #2563eb);
+  filter: brightness(1.1);
 }
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
@@ -505,6 +489,7 @@ header p {
   pointer-events: none;
   z-index: 999;
 }
+/* Footer / Firma con distribución en 3 tercios */
 footer {
   width: 100%;
   display: grid;
@@ -526,10 +511,12 @@ footer a:hover {
   color: var(--yellow-glow);
   text-shadow: 0 0 8px rgba(234, 179, 8, 0.5);
 }
+/* Primer elemento asignado al tercio izquierdo y centrado en él */
 footer a.link-paterna {
   grid-column: 1;
   text-align: center;
 }
+/* Segundo elemento asignado al tercio derecho y centrado en él */
 footer a.link-nick {
   grid-column: 3;
   text-align: center;
@@ -539,22 +526,26 @@ footer a.link-nick {
 <body>
 <canvas id="canvas-confetti"></canvas>
 
-<!-- 1. Modal de Selección de Idioma -->
+<!-- 1. Modal de Selección de Idioma (Matriz 3x4) -->
 <div class="modal-overlay active" id="lang-modal">
   <div class="modal-card">
     <span class="icon-header">🌍</span>
     <h2>SELECT LANGUAGE</h2>
     <p style="font-size: 0.8rem; color: var(--gray-muted); margin-bottom: 6px;">CHOOSE YOUR LANGUAGE TO START:</p>
     <div class="language-grid">
+      <!-- Fila 1 -->
       <button class="btn-lang" onclick="selectLanguage('ca')"><span class="flag-catalunya"><span class="stripe"></span><span class="stripe"></span><span class="stripe"></span><span class="stripe"></span></span><span class="lang-name">CATALÀ</span></button>
       <button class="btn-lang" onclick="selectLanguage('es')"><span class="flag">🇪🇸</span><span class="lang-name">CASTELLANO</span></button>
       <button class="btn-lang" onclick="selectLanguage('en')"><span class="flag">🇬🇧</span><span class="lang-name">ENGLISH</span></button>
+      <!-- Fila 2 -->
       <button class="btn-lang" onclick="selectLanguage('fr')"><span class="flag">🇫🇷</span><span class="lang-name">FRANÇAIS</span></button>
       <button class="btn-lang" onclick="selectLanguage('de')"><span class="flag">🇩🇪</span><span class="lang-name">DEUTSCH</span></button>
       <button class="btn-lang" onclick="selectLanguage('pt')"><span class="flag">🇵🇹</span><span class="lang-name">PORTUGUÊS</span></button>
+      <!-- Fila 3 -->
       <button class="btn-lang" onclick="selectLanguage('nl')"><span class="flag">🇳🇱</span><span class="lang-name">NEDERLANDS</span></button>
       <button class="btn-lang" onclick="selectLanguage('it')"><span class="flag">🇮🇹</span><span class="lang-name">ITALIANO</span></button>
       <button class="btn-lang" onclick="selectLanguage('sv')"><span class="flag">🇸🇪</span><span class="lang-name">SVENSKA</span></button>
+      <!-- Fila 4 -->
       <button class="btn-lang" onclick="selectLanguage('pl')"><span class="flag">🇵🇱</span><span class="lang-name">POLSKI</span></button>
       <button class="btn-lang" onclick="selectLanguage('cs')"><span class="flag">🇨🇿</span><span class="lang-name">ČEŠTINA</span></button>
       <button class="btn-lang" onclick="selectLanguage('ja')"><span class="flag">🇯🇵</span><span class="lang-name">日本語</span></button>
@@ -595,6 +586,7 @@ footer a.link-nick {
 </header>
 
 <div class="game-container">
+  <!-- Scoreboard -->
   <div class="scoreboard-container">
     <div class="score-card player">
       <div class="label" id="lbl-player">JUGADOR</div>
@@ -607,6 +599,7 @@ footer a.link-nick {
     </div>
   </div>
 
+  <!-- Battle Arena -->
   <div class="arena" id="arena-box">
     <div class="choice-display">
       <div class="choice-icon-box" id="player-box">❓</div>
@@ -619,16 +612,27 @@ footer a.link-nick {
     <div class="status-message" id="status-msg">¡ELIGE TU MOVIMIENTO PARA EMPEZAR!</div>
   </div>
 
+  <!-- Controls -->
   <div class="controls-wrapper">
     <div class="controls-title" id="ctrl-title">SELECCIONA TU JUGADA</div>
     <div class="controls">
-      <button class="btn-choice" onclick="playRound('rock')"><span class="icon">💎</span><span class="btn-label" id="btn-rock">PIEDRA</span></button>
-      <button class="btn-choice" onclick="playRound('paper')"><span class="icon">📄</span><span class="btn-label" id="btn-paper">PAPEL</span></button>
-      <button class="btn-choice" onclick="playRound('scissors')"><span class="icon">✂️</span><span class="btn-label" id="btn-scissors">TIJERA</span></button>
+      <button class="btn-choice" onclick="playRound('rock')">
+        <span class="icon">💎</span>
+        <span class="btn-label" id="btn-rock">PIEDRA</span>
+      </button>
+      <button class="btn-choice" onclick="playRound('paper')">
+        <span class="icon">📄</span>
+        <span class="btn-label" id="btn-paper">PAPEL</span>
+      </button>
+      <button class="btn-choice" onclick="playRound('scissors')">
+        <span class="icon">✂️</span>
+        <span class="btn-label" id="btn-scissors">TIJERA</span>
+      </button>
     </div>
   </div>
 </div>
 
+<!-- FIRMA PIE DE PÁGINA (Reajustada por tercios) -->
 <footer>
   <a href="https://www.geocaching.com/plan/lists/BMFC2Z7" target="_blank" rel="noopener noreferrer" class="link-paterna">GeoPaterna</a>
   <a href="https://www.geocaching.com/p/?guid=8aa34b6e-769c-42e2-ab66-4163f9a40e13&wid=9b106a24-4eef-41ab-8a06-c207d4143cb1&ds=2" target="_blank" rel="noopener noreferrer" class="link-nick">fran_giga</a>
@@ -638,25 +642,25 @@ footer a.link-nick {
 <div class="modal-overlay" id="victory-modal">
   <div class="modal-card">
     <span class="icon-header">🔓</span>
-    <h2 style="color: #4ade80;" id="vic-title">¡ENHORABUENA! 🎉</h2>
-    <p style="color: var(--gray-muted); font-size: 0.85rem; margin-bottom: 5px;"><span id="vic-sub">HAS DERROTADO A LA BANCA 6 A</span> <span id="final-banca-score">0</span></p>
-    
+    <h2 style="color: #4ade80;" id="vic-title">¡ENHORABUNA! 🎉</h2>
+    <p style="color: var(--gray-muted); font-size: 0.85rem; margin-bottom: 5px;"><span id="vic-sub">HAS DERROTADO A LA BANCA 6 A</span><span id="final-banca-score">0</span></p>
     <div style="margin-top: 8px;">
       <span style="font-size: 0.85rem; color: var(--gray-light); text-transform: uppercase; font-weight: 600;" id="vic-combo-lbl">LA COMBINACIÓN ES:</span><br>
-      <div class="key-badge-container">
-        <div class="key-badge" id="secret-key-badge">2019</div>
-        <button class="btn-copy" id="btn-copy-key" onclick="copyKey()" title="Copiar clave">📋</button>
-      </div>
+      <div class="key-badge">2019</div>
     </div>
-
-    <div class="victory-actions">
-      <a href="https://www.certitudes.org/certitude?wp=GCBVFN3" target="_blank" rel="noopener noreferrer" class="btn-modal btn-certitude" id="btn-certitude">IR AL CERTITUDE</a>
-      <button class="btn-modal" id="btn-replay" onclick="resetGameFull()">JUGAR DE NUEVO</button>
-    </div>
+    
+    <!-- Botón Certitude -->
+    <a href="https://www.certitudes.org/certitude?wp=GCBVFN3" target="_blank" rel="noopener noreferrer" class="btn-certitude-link">
+      <button class="btn-modal btn-certitude" id="btn-certitude">IR AL CERTITUDE</button>
+    </a>
+    
+    <!-- Botón Replay -->
+    <button class="btn-modal" id="btn-replay" onclick="resetGameFull()" style="width: 100%; margin-top: 8px;">JUGAR DE NUEVO</button>
   </div>
 </div>
 
 <script>
+// Diccionario completo de 12 idiomas
 const translations = {
   ca: {
     subtitle: "PEDRA, PAPER O TISORA",
@@ -687,12 +691,12 @@ const translations = {
     vicTitle: "ENHORABONA! 🎉",
     vicSub: "HAS DERROTAT LA BANCA 6 A",
     vicComboLbl: "LA COMBINACIÓ ÉS:",
-    btnCertitude: "ANAR AL CERTITUDE",
-    btnReplay: "JUGAR DE NOU"
+    btnReplay: "JUGAR DE NOU",
+    btnCertitude: "ANAR AL CERTITUDE"
   },
   es: {
     subtitle: "PIEDRA, PAPEL O TIJERA",
-    targetBadge: "GANA 6 PARTIDAS A LA BANCA",
+    targetBadge: "GANA 6 PARTIDES A LA BANCA",
     keyTitle: "CLAVE DE ACCESO",
     keyDesc: "INTRODUCE LA PALABRA GRABADA EN EL CONTENEDOR:",
     keyBtn: "VERIFICAR",
@@ -716,11 +720,11 @@ const translations = {
     beats: "VENCE A",
     bankReachedTarget: "¡LA BANCA HA ALCANZADO 6 PUNTOS! REINICIANDO...",
     restarted: "JUEGO REINICIADO. ¡INTÉNTALO DE NUEVO!",
-    vicTitle: "¡ENHORABUENA! 🎉",
+    vicTitle: "¡ENHORABUNA! 🎉",
     vicSub: "HAS DERROTADO A LA BANCA 6 A",
     vicComboLbl: "LA COMBINACIÓN ES:",
-    btnCertitude: "IR AL CERTITUDE",
-    btnReplay: "JUGAR DE NUEVO"
+    btnReplay: "JUGAR DE NUEVO",
+    btnCertitude: "IR AL CERTITUDE"
   },
   en: {
     subtitle: "ROCK, PAPER, SCISSORS",
@@ -751,8 +755,8 @@ const translations = {
     vicTitle: "CONGRATULATIONS! 🎉",
     vicSub: "YOU BEAT THE BANK 6 TO",
     vicComboLbl: "THE COMBINATION IS:",
-    btnCertitude: "GO TO CERTITUDE",
-    btnReplay: "PLAY AGAIN"
+    btnReplay: "PLAY AGAIN",
+    btnCertitude: "GO TO CERTITUDE"
   },
   fr: {
     subtitle: "PIERRE, PAPIER, CISEAUX",
@@ -783,8 +787,8 @@ const translations = {
     vicTitle: "FÉLICITATIONS ! 🎉",
     vicSub: "VOUS AVEZ BATTU LA BANQUE 6 À",
     vicComboLbl: "LA COMBINAISON EST :",
-    btnCertitude: "ALLER SUR CERTITUDE",
-    btnReplay: "REJOUER"
+    btnReplay: "REJOUER",
+    btnCertitude: "ALLER SUR CERTITUDE"
   },
   de: {
     subtitle: "SCHERE, STEIN, PAPIER",
@@ -815,8 +819,8 @@ const translations = {
     vicTitle: "HERZLICHEN GLÜCKWUNSCH! 🎉",
     vicSub: "DU HAST DIE BANK 6 ZU",
     vicComboLbl: "DIE KOMBINATION LAUTET:",
-    btnCertitude: "ZU CERTITUDE GEHEN",
-    btnReplay: "ERNEUT SPIELEN"
+    btnReplay: "ERNEUT SPIELEN",
+    btnCertitude: "ZU CERTITUDE"
   },
   pt: {
     subtitle: "PEDRA, PAPEL E TESOURA",
@@ -847,8 +851,8 @@ const translations = {
     vicTitle: "PARABÉNS! 🎉",
     vicSub: "VOCÊ DERROTOU A BANCA 6 A",
     vicComboLbl: "A COMBINAÇÃO É:",
-    btnCertitude: "IR PARA O CERTITUDE",
-    btnReplay: "JOGAR NOVAMENTE"
+    btnReplay: "JOGAR NOVAMENTE",
+    btnCertitude: "IR PARA O CERTITUDE"
   },
   nl: {
     subtitle: "STEEN, PAPIER, SCHAAR",
@@ -879,8 +883,8 @@ const translations = {
     vicTitle: "GEFELICITEERD! 🎉",
     vicSub: "JE HEEFT DE BANK VERSLAGEN MET 6 TEGEN",
     vicComboLbl: "DE COMBINATIE IS:",
-    btnCertitude: "GA NAAR CERTITUDE",
-    btnReplay: "OPNIEUW SPEELEN"
+    btnReplay: "OPNIEUW SPIELEN",
+    btnCertitude: "GA NAAR CERTITUDE"
   },
   it: {
     subtitle: "SASSO, CARTA, FORBICE",
@@ -911,8 +915,8 @@ const translations = {
     vicTitle: "CONGRATULAZIONI! 🎉",
     vicSub: "HAI BATTUTO LA BANCA 6 A",
     vicComboLbl: "LA COMBINAZIONE È:",
-    btnCertitude: "VAI SU CERTITUDE",
-    btnReplay: "GIOCA DI NUOVO"
+    btnReplay: "GIOCA DI NUOVO",
+    btnCertitude: "VAI SU CERTITUDE"
   },
   sv: {
     subtitle: "STEN, SAX, PÅSE",
@@ -943,8 +947,8 @@ const translations = {
     vicTitle: "GRATTIS! 🎉",
     vicSub: "DU BESEGRADE BANKEN MED 6 MOT",
     vicComboLbl: "KOMBINATIONEN ÄR:",
-    btnCertitude: "GÅ TILL CERTITUDE",
-    btnReplay: "SPELA IGEN"
+    btnReplay: "SPELA IGEN",
+    btnCertitude: "GÅ TILL CERTITUDE"
   },
   pl: {
     subtitle: "KAMIEŃ, PAPIER, NOŻYCE",
@@ -975,8 +979,8 @@ const translations = {
     vicTitle: "GRATULACJE! 🎉",
     vicSub: "POKONAŁEŚ BANK 6 DO",
     vicComboLbl: "KOMBINACJA TO:",
-    btnCertitude: "PRZEJDŹ DO CERTITUDE",
-    btnReplay: "ZAGRAJ PONOWNIE"
+    btnReplay: "ZAGRAJ PONOWNIE",
+    btnCertitude: "PRZEJDŹ DO CERTITUDE"
   },
   cs: {
     subtitle: "KÁMEN, NŮŽKY, PAPÍR",
@@ -1007,8 +1011,8 @@ const translations = {
     vicTitle: "GRATULUJEME! 🎉",
     vicSub: "PORAZIL JSTE BANKU 6 KU",
     vicComboLbl: "KOMBINACE JE:",
-    btnCertitude: "PŘEJDÍT NA CERTITUDE",
-    btnReplay: "HRÁT ZNOVU"
+    btnReplay: "HRÁT ZNOVU",
+    btnCertitude: "PŘEJÍT NA CERTITUDE"
   },
   ja: {
     subtitle: "じゃんけん (JANKEN)",
@@ -1039,8 +1043,8 @@ const translations = {
     vicTitle: "おめでとうございます！ 🎉",
     vicSub: "バンクに 6 対 で勝利しました:",
     vicComboLbl: "解錠コードは:",
-    btnCertitude: "CERTITUDEへ移動",
-    btnReplay: "もう一度プレイ"
+    btnReplay: "もう一度プレイ",
+    btnCertitude: "CERTITUDEへ行く"
   }
 };
 
@@ -1070,13 +1074,13 @@ function selectLanguage(lang) {
   document.getElementById('vic-title').innerText = t.vicTitle;
   document.getElementById('vic-sub').innerText = t.vicSub;
   document.getElementById('vic-combo-lbl').innerText = t.vicComboLbl;
-  document.getElementById('btn-certitude').innerText = t.btnCertitude;
   document.getElementById('btn-replay').innerText = t.btnReplay;
-  
+  document.getElementById('btn-certitude').innerText = t.btnCertitude;
+
   moveData.rock.name = t.rock;
   moveData.paper.name = t.paper;
   moveData.scissors.name = t.scissors;
-  
+
   playSound('click');
   document.getElementById('lang-modal').classList.remove('active');
   document.getElementById('key-modal').classList.add('active');
@@ -1090,7 +1094,7 @@ function checkAccessKey() {
   const t = translations[currentLang];
   const errorElement = document.getElementById('key-error');
   const cardElement = document.getElementById('key-modal-card');
-  
+
   if (inputVal === ACCESS_SECRET) {
     playSound('win');
     errorElement.innerText = '';
@@ -1120,10 +1124,12 @@ function initAudio() {
 function playSound(type) {
   initAudio();
   if (!audioCtx) return;
+
   const osc = audioCtx.createOscillator();
   const gain = audioCtx.createGain();
   osc.connect(gain);
   gain.connect(audioCtx.destination);
+
   const now = audioCtx.currentTime;
 
   if (type === 'click') {
@@ -1281,18 +1287,6 @@ function handleVictory() {
   document.getElementById('victory-modal').classList.add('active');
 }
 
-function copyKey() {
-  const keyText = document.getElementById('secret-key-badge').innerText;
-  navigator.clipboard.writeText(keyText).then(() => {
-    const copyBtn = document.getElementById('btn-copy-key');
-    copyBtn.innerText = '✅';
-    playSound('click');
-    setTimeout(() => {
-      copyBtn.innerText = '📋';
-    }, 1500);
-  });
-}
-
 function handleDefeat() {
   const t = translations[currentLang];
   playSound('reset');
@@ -1350,6 +1344,7 @@ function startConfetti() {
   const ctx = canvas.getContext('2d');
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
+
   const particles = [];
   const colors = ['#eab308', '#facc15', '#ffffff', '#cbd5e1', '#ca8a04'];
 
